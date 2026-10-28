@@ -19,6 +19,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -90,30 +91,30 @@ fun RatingScreen(modifier: Modifier = Modifier) {
                 fontWeight = FontWeight.Bold
             )
 
-            OutlinedTextField(
+            GastroVoteTextField(
                 value = bar,
                 onValueChange = { bar = it },
-                label = { stringResource(R.string.bar_name) },
+                label = R.string.bar_name,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Next
                 )
             )
 
-            OutlinedTextField(
+            GastroVoteTextField(
                 value = tapa,
                 onValueChange = { tapa = it },
-                label = { stringResource(R.string.tapa_name) },
+                label = R.string.tapa_name,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Next
                 )
             )
 
-            OutlinedTextField(
+            GastroVoteTextField(
                 value = price.toString(),
                 onValueChange = { price = it.toDouble()},
-                label = { stringResource(R.string.tapa_price) },
+                label = R.string.tapa_price,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Done
@@ -202,6 +203,23 @@ fun RatingScreen(modifier: Modifier = Modifier) {
     }
 }
 
+@Composable
+private fun GastroVoteTextField(value: String, onValueChange: (String) -> Unit, label: Int, keyboardOptions: KeyboardOptions) {
+    OutlinedTextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = value,
+        onValueChange = onValueChange,
+        label = { stringResource(label) },
+        keyboardOptions = keyboardOptions,
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = Calypso,
+            unfocusedBorderColor = Color.DarkGray,
+            focusedLabelColor = Calypso,
+            unfocusedLabelColor = Color.DarkGray,
+            cursorColor = Calypso
+        )
+    )
+}
 @Composable
 private fun LikeController (state: Boolean) {
     if (state) {
