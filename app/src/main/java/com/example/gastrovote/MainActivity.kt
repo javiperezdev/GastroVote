@@ -33,11 +33,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.gastrovote.ui.theme.Calypso
 import com.example.gastrovote.ui.theme.GastroVoteTheme
 
 class MainActivity : ComponentActivity() {
@@ -67,10 +69,11 @@ fun RatingScreen(modifier: Modifier = Modifier) {
 
 
     Column(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Image(
-            painter = painterResource(R.drawable.banner_tapas),
+            painter = painterResource(R.drawable.gastro_vote_banner),
             null,
             modifier = Modifier.fillMaxWidth()
         )
@@ -80,14 +83,11 @@ fun RatingScreen(modifier: Modifier = Modifier) {
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             Text(
-                text = stringResource(R.string.app_title),
-                modifier = modifier.fillMaxWidth(),
-                fontSize = 24.sp,
-            )
-            Text(
                 text = stringResource(R.string.rate_it),
                 modifier = modifier.fillMaxWidth(),
                 fontSize = 16.sp,
+                color = Calypso,
+                fontWeight = FontWeight.Bold
             )
 
             OutlinedTextField(
@@ -121,8 +121,9 @@ fun RatingScreen(modifier: Modifier = Modifier) {
             )
 
             Row(
+                modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
+                horizontalArrangement = Arrangement.spacedBy(32.dp)
             ) {
                 Text(
                     text = stringResource(R.string.i_like_it),
