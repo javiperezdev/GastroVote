@@ -3,13 +3,13 @@
     <string name="app_title">GastroVote</string>
     <string name="rate_it">Valora tu tapa</string>
     <string name="tapa_name">Nombre de la tapa </string>
-    <string name="bar_name">Nombre del var</string>
+    <string name="bar_name">Nombre del bar</string>
     <string name="tapa_price">Precio ($)</string>
     <string name="i_like_it">Me gusta</string>
     <string name="did_you_like_it">¿Te ha gustado?</string>
     <string name="you_like_it">Te ha gustado la tapa!</string>
     <string name="clean">LIMPIAR</string>
-    <string name="calculate_price">CALCULAR PRECIO</string>
+    <string name="post_review">Publicar reseña</string>
     <string name="student_discount">Descuento estudiante (10%)</string>
     <string name="resume">Aqui apareceran los precios finales</string>
 </resources>

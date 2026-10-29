@@ -41,6 +41,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gastrovote.ui.theme.Calypso
+import com.example.gastrovote.ui.theme.CornflowerBlue
 import com.example.gastrovote.ui.theme.GastroVoteTheme
 
 class MainActivity : ComponentActivity() {
@@ -94,7 +95,7 @@ fun RatingScreen(modifier: Modifier = Modifier) {
             GastroVoteTextField(
                 value = bar,
                 onValueChange = { bar = it },
-                label = R.string.bar_name,
+                placeholder = stringResource(R.string.bar_name),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Next
@@ -104,7 +105,7 @@ fun RatingScreen(modifier: Modifier = Modifier) {
             GastroVoteTextField(
                 value = tapa,
                 onValueChange = { tapa = it },
-                label = R.string.tapa_name,
+                placeholder = stringResource(R.string.tapa_name),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Next
@@ -114,7 +115,7 @@ fun RatingScreen(modifier: Modifier = Modifier) {
             GastroVoteTextField(
                 value = price.toString(),
                 onValueChange = { price = it.toDouble()},
-                label = R.string.tapa_price,
+                placeholder = stringResource(R.string.tapa_price),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Done
@@ -163,7 +164,7 @@ fun RatingScreen(modifier: Modifier = Modifier) {
             Row(
                 modifier = modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Button(
+                GastroVoteButton(
                     onClick = {
                         bar = ""
                         tapa = ""
@@ -172,24 +173,17 @@ fun RatingScreen(modifier: Modifier = Modifier) {
                         liked = false
                         isStudent = false
                     },
-                    colors = ButtonDefaults.buttonColors(Color.Red)
-                ) {
-                    Text(
-                        text = stringResource(R.string.clean),
-                        fontSize = 16.sp
-                    )
-                }
+                    buttonContent = stringResource(R.string.clean),
+                    color = Calypso
+                )
 
-                Button(
+                GastroVoteButton(
                     onClick = {
                         finalPrice = calculateFinalPrice(bar = bar, tapa = tapa, price = price, isStudent = isStudent, context = context)
-                    }
-                ) {
-                    Text(
-                        text = stringResource(R.string.calculate_price),
-                        fontSize = 16.sp
-                    )
-                }
+                    },
+                    buttonContent = stringResource(R.string.post_review),
+                    color = CornflowerBlue
+                )
             }
             if (finalPrice == -1.0) {
                 Text(
@@ -204,12 +198,12 @@ fun RatingScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun GastroVoteTextField(value: String, onValueChange: (String) -> Unit, label: Int, keyboardOptions: KeyboardOptions) {
+private fun GastroVoteTextField(value: String, placeholder: String, onValueChange: (String) -> Unit, keyboardOptions: KeyboardOptions) {
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
         value = value,
+        placeholder = { Text(placeholder) },
         onValueChange = onValueChange,
-        label = { stringResource(label) },
         keyboardOptions = keyboardOptions,
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = Calypso,
@@ -220,6 +214,20 @@ private fun GastroVoteTextField(value: String, onValueChange: (String) -> Unit, 
         )
     )
 }
+
+@Composable
+private fun GastroVoteButton(buttonContent: String, onClick: () -> Unit, color: Color) {
+    Button(
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(color)
+    ) {
+        Text(
+            text = buttonContent,
+            fontSize = 16.sp
+        )
+    }
+}
+
 @Composable
 private fun LikeController (state: Boolean) {
     if (state) {
