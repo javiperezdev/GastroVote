@@ -18,8 +18,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,6 +41,8 @@ import androidx.compose.ui.unit.sp
 import com.example.gastrovote.ui.theme.Calypso
 import com.example.gastrovote.ui.theme.CornflowerBlue
 import com.example.gastrovote.ui.theme.GastroVoteTheme
+import com.example.gastrovote.ui.theme.components.GastroVoteTextField
+import com.example.gastrovote.ui.theme.components.GastroVoteButton
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -194,37 +194,6 @@ fun RatingScreen(modifier: Modifier = Modifier) {
 
             ShowTotal(bar = bar, tapa = tapa, price = finalPrice, liked = liked, context = context)
         }
-    }
-}
-
-@Composable
-private fun GastroVoteTextField(value: String, placeholder: String, onValueChange: (String) -> Unit, keyboardOptions: KeyboardOptions) {
-    OutlinedTextField(
-        modifier = Modifier.fillMaxWidth(),
-        value = value,
-        placeholder = { Text(placeholder) },
-        onValueChange = onValueChange,
-        keyboardOptions = keyboardOptions,
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = Calypso,
-            unfocusedBorderColor = Color.DarkGray,
-            focusedLabelColor = Calypso,
-            unfocusedLabelColor = Color.DarkGray,
-            cursorColor = Calypso
-        )
-    )
-}
-
-@Composable
-private fun GastroVoteButton(buttonContent: String, onClick: () -> Unit, color: Color) {
-    Button(
-        onClick = onClick,
-        colors = ButtonDefaults.buttonColors(color)
-    ) {
-        Text(
-            text = buttonContent,
-            fontSize = 16.sp
-        )
     }
 }
 
