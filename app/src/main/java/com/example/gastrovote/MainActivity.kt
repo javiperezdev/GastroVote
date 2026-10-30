@@ -15,8 +15,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -28,7 +26,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -38,11 +35,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.gastrovote.domain.calculate
+import com.example.gastrovote.ui.components.GastroVoteButton
+import com.example.gastrovote.ui.components.GastroVoteTextField
 import com.example.gastrovote.ui.theme.Calypso
 import com.example.gastrovote.ui.theme.CornflowerBlue
 import com.example.gastrovote.ui.theme.GastroVoteTheme
-import com.example.gastrovote.ui.theme.components.GastroVoteTextField
-import com.example.gastrovote.ui.theme.components.GastroVoteButton
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -137,7 +135,10 @@ fun RatingScreen(modifier: Modifier = Modifier) {
                     onCheckedChange = {liked = !liked }
                 )
 
-                LikeController(liked)
+                Text(
+                    text = stringResource(if (liked) R.string.you_like_it else R.string.did_you_like_it),
+                    fontSize = 12.sp,
+                )
             }
 
             Row(
@@ -168,7 +169,7 @@ fun RatingScreen(modifier: Modifier = Modifier) {
                     onClick = {
                         bar = ""
                         tapa = ""
-                        price = -1.0
+                        price = 0.0
                         finalPrice = -1.0
                         liked = false
                         isStudent = false
@@ -192,23 +193,9 @@ fun RatingScreen(modifier: Modifier = Modifier) {
                 )
             }
 
-            ShowTotal(bar = bar, tapa = tapa, price = finalPrice, liked = liked, context = context)
+            ShowTotal(bar = bar, tapa = tapa, price = price, liked = liked, finalPrice = finalPrice, isStudent = isStudent, context = context)
         }
     }
-}
-
-@Composable
-private fun LikeController (state: Boolean) {
-    if (state) {
-        return  Text(
-            text = stringResource(R.string.you_like_it),
-            fontSize = 12.sp
-        )
-    }
-    return Text(
-        text = stringResource(R.string.did_you_like_it),
-        fontSize = 12.sp
-    )
 }
 
 private fun calculateFinalPrice(bar: String, isStudent: Boolean, tapa: String, price: Double, context: Context): Double {
@@ -219,23 +206,15 @@ private fun calculateFinalPrice(bar: String, isStudent: Boolean, tapa: String, p
         showToast(text="El precio no es valido", context = context)
     }
     else {
-        var finalPrice = price
-
-        if (isStudent) {
-            val discount = (price * 0.10)
-            finalPrice = price - discount
-        }
-
-        return finalPrice
+        return calculate(basePrice = price, isStudent = isStudent)
     }
     return -1.0
 }
 
 @Composable
-private fun ShowTotal(bar: String, tapa: String, price: Double, discount: Double = 0.00, liked: Boolean, context: Context) {
-    if (price == -1.0) return
-
-    val finalPrice = price - discount
+private fun ShowTotal(bar: String, tapa: String, price: Double, finalPrice: Double, liked: Boolean, isStudent: Boolean, context: Context) {
+    if (finalPrice == -1.0) return
+    val discount = if (isStudent) "10%" else "0%"
     val like = if(liked) "Si" else "No"
 
     showToast(text = "Precio calculado", context)

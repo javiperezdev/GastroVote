@@ -1,4 +1,4 @@
-package com.example.gastrovote.ui.theme.components
+package com.example.gastrovote.ui.components
 
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
