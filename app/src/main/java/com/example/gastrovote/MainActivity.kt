@@ -20,9 +20,8 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -58,12 +57,12 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun RatingScreen(modifier: Modifier = Modifier) {
-    var bar by remember { mutableStateOf("") }
-    var tapa by remember { mutableStateOf("") }
-    var price by remember { mutableDoubleStateOf(0.0) }
-    var finalPrice by remember { mutableDoubleStateOf(-1.0) }
-    var liked by remember { mutableStateOf(false) }
-    var isStudent by remember { mutableStateOf(false) }
+    var bar by rememberSaveable { mutableStateOf("") }
+    var tapa by rememberSaveable { mutableStateOf("") }
+    var priceText by rememberSaveable { mutableStateOf("") }
+    var finalPrice by rememberSaveable { mutableStateOf(-1.0) }
+    var liked by rememberSaveable { mutableStateOf(false) }
+    var isStudent by rememberSaveable { mutableStateOf(false) }
 
     val context = LocalContext.current
 
@@ -79,12 +78,12 @@ fun RatingScreen(modifier: Modifier = Modifier) {
         )
 
         Column(
-            modifier = modifier.fillMaxSize().padding(start = 24.dp, end = 24.dp).safeDrawingPadding(),
+            modifier = Modifier.fillMaxSize().padding(start = 24.dp, end = 24.dp).safeDrawingPadding(),
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             Text(
                 text = stringResource(R.string.rate_it),
-                modifier = modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 fontSize = 16.sp,
                 color = Calypso,
                 fontWeight = FontWeight.Bold
@@ -92,7 +91,10 @@ fun RatingScreen(modifier: Modifier = Modifier) {
 
             GastroVoteTextField(
                 value = bar,
-                onValueChange = { bar = it },
+                onValueChange = {
+                    bar = it
+                    finalPrice = -1.0
+                },
                 placeholder = stringResource(R.string.bar_name),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
@@ -102,7 +104,10 @@ fun RatingScreen(modifier: Modifier = Modifier) {
 
             GastroVoteTextField(
                 value = tapa,
-                onValueChange = { tapa = it },
+                onValueChange = {
+                    tapa = it
+                    finalPrice = -1.0
+                },
                 placeholder = stringResource(R.string.tapa_name),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
@@ -111,8 +116,11 @@ fun RatingScreen(modifier: Modifier = Modifier) {
             )
 
             GastroVoteTextField(
-                value = price.toString(),
-                onValueChange = { price = it.toDouble()},
+                value = priceText,
+                onValueChange = {
+                    priceText = filterPriceInput(it)
+                    finalPrice = -1.0
+                },
                 placeholder = stringResource(R.string.tapa_price),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
@@ -132,7 +140,7 @@ fun RatingScreen(modifier: Modifier = Modifier) {
 
                 Switch(
                     checked = liked,
-                    onCheckedChange = {liked = !liked }
+                    onCheckedChange = { liked = it }
                 )
 
                 Text(
@@ -142,13 +150,9 @@ fun RatingScreen(modifier: Modifier = Modifier) {
             }
 
             Row(
-                modifier = modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalAlignment = Alignment.CenterVertically) {
-
-                if(isStudent) {
-                    showToast(text="Recuerda ensenyar tu carnet de estudiante", context = context)
-                }
 
                 Text(
                     text = stringResource(R.string.student_discount),
@@ -156,20 +160,24 @@ fun RatingScreen(modifier: Modifier = Modifier) {
                 )
                 Checkbox(
                     checked = isStudent,
-                    onCheckedChange = {
-                        isStudent = !isStudent
+                    onCheckedChange = { checked ->
+                        isStudent = checked
+                        finalPrice = -1.0
+                        if (checked) {
+                            showToast(text = "Recuerda ensenyar tu carnet de estudiante", context = context)
+                        }
                     }
                 )
             }
 
             Row(
-                modifier = modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 GastroVoteButton(
                     onClick = {
                         bar = ""
                         tapa = ""
-                        price = 0.0
+                        priceText = ""
                         finalPrice = -1.0
                         liked = false
                         isStudent = false
@@ -180,7 +188,17 @@ fun RatingScreen(modifier: Modifier = Modifier) {
 
                 GastroVoteButton(
                     onClick = {
-                        finalPrice = calculateFinalPrice(bar = bar, tapa = tapa, price = price, isStudent = isStudent, context = context)
+                        val result = calculateFinalPrice(
+                            bar = bar,
+                            tapa = tapa,
+                            priceText = priceText,
+                            isStudent = isStudent,
+                            context = context
+                        )
+                        finalPrice = result
+                        if (result != -1.0) {
+                            showToast(text = "Precio calculado", context = context)
+                        }
                     },
                     buttonContent = stringResource(R.string.post_review),
                     color = CornflowerBlue
@@ -193,31 +211,67 @@ fun RatingScreen(modifier: Modifier = Modifier) {
                 )
             }
 
-            ShowTotal(bar = bar, tapa = tapa, price = price, liked = liked, finalPrice = finalPrice, isStudent = isStudent, context = context)
+            ShowTotal(
+                bar = bar,
+                tapa = tapa,
+                priceText = priceText,
+                liked = liked,
+                finalPrice = finalPrice,
+                isStudent = isStudent
+            )
         }
     }
 }
 
-private fun calculateFinalPrice(bar: String, isStudent: Boolean, tapa: String, price: Double, context: Context): Double {
-    if (bar == "" || tapa == "") {
-        showToast(text="Indica el bar y la tapa", context = context)
+private fun calculateFinalPrice(
+    bar: String,
+    isStudent: Boolean,
+    tapa: String,
+    priceText: String,
+    context: Context
+): Double {
+    val price = priceText.replace(',', '.').toDoubleOrNull()
+
+    return when {
+        bar.isBlank() || tapa.isBlank() -> {
+            showToast(text = "Indica el bar y la tapa", context = context)
+            -1.0
+        }
+        price == null || price <= 0 -> {
+            showToast(text = "El precio no es valido", context = context)
+            -1.0
+        }
+        else -> calculate(basePrice = price, isStudent = isStudent)
     }
-    else if (price <= 0) {
-        showToast(text="El precio no es valido", context = context)
+}
+
+private fun filterPriceInput(input: String): String {
+    var separatorFound = false
+    return buildString {
+        input.forEach { character ->
+            when {
+                character.isDigit() -> append(character)
+                (character == '.' || character == ',') && !separatorFound -> {
+                    separatorFound = true
+                    append(character)
+                }
+            }
+        }
     }
-    else {
-        return calculate(basePrice = price, isStudent = isStudent)
-    }
-    return -1.0
 }
 
 @Composable
-private fun ShowTotal(bar: String, tapa: String, price: Double, finalPrice: Double, liked: Boolean, isStudent: Boolean, context: Context) {
+private fun ShowTotal(
+    bar: String,
+    tapa: String,
+    priceText: String,
+    finalPrice: Double,
+    liked: Boolean,
+    isStudent: Boolean
+) {
     if (finalPrice == -1.0) return
     val discount = if (isStudent) "10%" else "0%"
-    val like = if(liked) "Si" else "No"
-
-    showToast(text = "Precio calculado", context)
+    val like = if (liked) "Si" else "No"
 
     Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(4.dp)) {
         Text(
@@ -231,7 +285,7 @@ private fun ShowTotal(bar: String, tapa: String, price: Double, finalPrice: Doub
         )
 
         Text(
-            text = "Precio: $price",
+            text = "Precio: $priceText",
             fontSize = 12.sp
         )
 
