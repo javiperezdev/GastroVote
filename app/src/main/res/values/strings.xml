@@ -22,7 +22,7 @@
     <string name="discount_without_student">0%</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
-    <string name="student_card_reminder">Recuerda ensenyar tu carnet de estudiante</string>
+    <string name="student_card_reminder">Recuerda enseñar tu carnet de estudiante</string>
     <string name="price_calculated">Precio calculado</string>
     <string name="error_bar_and_tapa">Indica el bar y la tapa</string>
     <string name="error_invalid_price">El precio no es valido</string>

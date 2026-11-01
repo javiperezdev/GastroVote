@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Gastro Vote</string>
+    <string name="app_title">GastroVote</string>
+    <string name="rate_it">Rate your tapa</string>
+    <string name="tapa_name">Tapa name</string>
+    <string name="bar_name">Bar name</string>
+    <string name="tapa_price">Price ($)</string>
+    <string name="i_like_it">I like it</string>
+    <string name="did_you_like_it">Did you like it?</string>
+    <string name="you_like_it">You liked the tapa!</string>
+    <string name="clean">CLEAR</string>
+    <string name="post_review">Post review</string>
+    <string name="student_discount">Student discount (10%)</string>
+    <string name="resume">Final prices will appear here</string>
+    <string name="summary_tapa">Tapa: %1$s</string>
+    <string name="summary_bar">Bar: %1$s</string>
+    <string name="summary_price">Price: %1$s</string>
+    <string name="summary_discount">Discount: %1$s</string>
+    <string name="summary_final_price">Final Price: %1$s</string>
+    <string name="summary_liked">Liked: %1$s</string>
+    <string name="discount_with_student">10%</string>
+    <string name="discount_without_student">0%</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="student_card_reminder">Remember to show your student card</string>
+    <string name="price_calculated">Price calculated</string>
+    <string name="error_bar_and_tapa">Enter the bar and the tapa</string>
+    <string name="error_invalid_price">The price is not valid</string>
+</resources>
