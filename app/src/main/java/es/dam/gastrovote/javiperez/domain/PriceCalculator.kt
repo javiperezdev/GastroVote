@@ -1,4 +1,4 @@
-package com.example.gastrovote.domain
+package es.dam.gastrovote.javiperez.domain
 
 private const val STUDENT_DISCOUNT_RATE = 0.10
 

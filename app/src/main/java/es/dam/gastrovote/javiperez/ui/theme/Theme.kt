@@ -1,4 +1,4 @@
-package com.example.gastrovote.ui.theme
+package es.dam.gastrovote.javiperez.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

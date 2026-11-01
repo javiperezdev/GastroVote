@@ -12,4 +12,18 @@
     <string name="post_review">Publicar reseña</string>
     <string name="student_discount">Descuento estudiante (10%)</string>
     <string name="resume">Aqui apareceran los precios finales</string>
+    <string name="summary_tapa">Tapa: %1$s</string>
+    <string name="summary_bar">Bar: %1$s</string>
+    <string name="summary_price">Precio: %1$s</string>
+    <string name="summary_discount">Descuento: %1$s</string>
+    <string name="summary_final_price">Precio Final %1$s</string>
+    <string name="summary_liked">Me gusta : %1$s</string>
+    <string name="discount_with_student">10%</string>
+    <string name="discount_without_student">0%</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="student_card_reminder">Recuerda ensenyar tu carnet de estudiante</string>
+    <string name="price_calculated">Precio calculado</string>
+    <string name="error_bar_and_tapa">Indica el bar y la tapa</string>
+    <string name="error_invalid_price">El precio no es valido</string>
 </resources>

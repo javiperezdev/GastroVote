@@ -1,4 +1,4 @@
-package com.example.gastrovote.ui.components
+package es.dam.gastrovote.javiperez.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
@@ -8,7 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.example.gastrovote.ui.theme.Calypso
+import es.dam.gastrovote.javiperez.ui.theme.Calypso
 
 @Composable
 internal fun GastroVoteTextField(value: String, placeholder: String, onValueChange: (String) -> Unit, keyboardOptions: KeyboardOptions) {

@@ -1,6 +1,5 @@
-package domain
+package es.dam.gastrovote.javiperez.domain
 
-import com.example.gastrovote.domain.calculate
 import junit.framework.TestCase
 import org.junit.Test
 

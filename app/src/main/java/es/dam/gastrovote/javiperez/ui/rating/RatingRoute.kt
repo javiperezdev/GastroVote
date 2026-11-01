@@ -1,4 +1,4 @@
-package com.example.gastrovote.ui.rating
+package es.dam.gastrovote.javiperez.ui.rating
 
 import android.content.Context
 import android.widget.Toast
@@ -9,7 +9,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.example.gastrovote.domain.calculate
+import es.dam.gastrovote.javiperez.R
+import es.dam.gastrovote.javiperez.domain.calculate
 
 @Composable
 fun RatingRoute(modifier: Modifier = Modifier) {
@@ -46,7 +47,7 @@ fun RatingRoute(modifier: Modifier = Modifier) {
             isStudent = checked
             finalPrice = -1.0
             if (checked) {
-                showToast(text = "Recuerda ensenyar tu carnet de estudiante", context = context)
+                showToast(text = context.getString(R.string.student_card_reminder), context = context)
             }
         },
         onPublish = {
@@ -59,7 +60,7 @@ fun RatingRoute(modifier: Modifier = Modifier) {
             )
             finalPrice = result
             if (result != -1.0) {
-                showToast(text = "Precio calculado", context = context)
+                showToast(text = context.getString(R.string.price_calculated), context = context)
             }
         },
         onClear = {
@@ -85,11 +86,11 @@ private fun calculateFinalPrice(
 
     return when {
         bar.isBlank() || tapa.isBlank() -> {
-            showToast(text = "Indica el bar y la tapa", context = context)
+            showToast(text = context.getString(R.string.error_bar_and_tapa), context = context)
             -1.0
         }
         price == null || price <= 0 -> {
-            showToast(text = "El precio no es valido", context = context)
+            showToast(text = context.getString(R.string.error_invalid_price), context = context)
             -1.0
         }
         else -> calculate(basePrice = price, isStudent = isStudent)

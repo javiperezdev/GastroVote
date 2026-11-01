@@ -1,4 +1,4 @@
-package com.example.gastrovote.ui.rating
+package es.dam.gastrovote.javiperez.ui.rating
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -23,12 +23,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.gastrovote.R
-import com.example.gastrovote.ui.components.GastroVoteButton
-import com.example.gastrovote.ui.components.GastroVoteTextField
-import com.example.gastrovote.ui.theme.Calypso
-import com.example.gastrovote.ui.theme.CornflowerBlue
-import com.example.gastrovote.ui.theme.GastroVoteTheme
+import es.dam.gastrovote.javiperez.R
+import es.dam.gastrovote.javiperez.ui.components.GastroVoteButton
+import es.dam.gastrovote.javiperez.ui.components.GastroVoteTextField
+import es.dam.gastrovote.javiperez.ui.theme.Calypso
+import es.dam.gastrovote.javiperez.ui.theme.CornflowerBlue
+import es.dam.gastrovote.javiperez.ui.theme.GastroVoteTheme
 
 @Composable
 internal fun RatingScreen(
@@ -185,19 +185,21 @@ private fun RatingSummary(
 ) {
     if (finalPrice == -1.0) return
 
-    val discount = if (isStudent) "10%" else "0%"
-    val like = if (liked) "Si" else "No"
+    val discount = stringResource(
+        if (isStudent) R.string.discount_with_student else R.string.discount_without_student
+    )
+    val like = stringResource(if (liked) R.string.yes else R.string.no)
 
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        Text(text = "Tapa: $tapa", fontSize = 12.sp)
-        Text(text = "Bar: $bar", fontSize = 12.sp)
-        Text(text = "Precio: $priceText", fontSize = 12.sp)
-        Text(text = "Descuento: $discount", fontSize = 12.sp)
-        Text(text = "Precio Final $finalPrice", fontSize = 12.sp)
-        Text(text = "Me gusta : $like", fontSize = 12.sp)
+        Text(text = stringResource(R.string.summary_tapa, tapa), fontSize = 12.sp)
+        Text(text = stringResource(R.string.summary_bar, bar), fontSize = 12.sp)
+        Text(text = stringResource(R.string.summary_price, priceText), fontSize = 12.sp)
+        Text(text = stringResource(R.string.summary_discount, discount), fontSize = 12.sp)
+        Text(text = stringResource(R.string.summary_final_price, finalPrice), fontSize = 12.sp)
+        Text(text = stringResource(R.string.summary_liked, like), fontSize = 12.sp)
     }
 }
 

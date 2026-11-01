@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    namespace = "com.example.gastrovote"
+    namespace = "es.dam.gastrovote.javiperez"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "com.example.gastrovote"
+        applicationId = "es.dam.gastrovote.javiperez"
         minSdk = 24
         targetSdk = 37
         versionCode = 1
