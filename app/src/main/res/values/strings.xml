@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Gastro Vote</string>
     <string name="app_title">GastroVote</string>
-    <string name="rate_it">Valora tu tapa</string>
+    <string name="app_subtitle">Ruta de la tapa</string>
     <string name="tapa_name">Nombre de la tapa </string>
-    <string name="bar_name">Nombre del bar</string>
+    <string name="choose_bar">Elige un bar</string>
     <string name="tapa_price">Precio ($)</string>
     <string name="i_like_it">Me gusta</string>
     <string name="did_you_like_it">¿Te ha gustado?</string>

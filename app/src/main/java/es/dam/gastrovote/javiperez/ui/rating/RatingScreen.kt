@@ -1,5 +1,6 @@
 package es.dam.gastrovote.javiperez.ui.rating
 
+import android.graphics.Paint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,8 +9,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,14 +21,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import es.dam.gastrovote.javiperez.R
+import es.dam.gastrovote.javiperez.domain.model.Tapa
 import es.dam.gastrovote.javiperez.ui.components.GastroVoteButton
-import es.dam.gastrovote.javiperez.ui.components.GastroVoteTextField
 import es.dam.gastrovote.javiperez.ui.theme.Calypso
 import es.dam.gastrovote.javiperez.ui.theme.CornflowerBlue
 import es.dam.gastrovote.javiperez.ui.theme.GastroVoteTheme
@@ -33,22 +34,21 @@ import es.dam.gastrovote.javiperez.ui.theme.GastroVoteTheme
 @Composable
 internal fun RatingScreen(
     bar: String,
-    tapa: String,
-    priceText: String,
+    tapa: Tapa,
+    originalPrice: Double,
     liked: Boolean,
     isStudent: Boolean,
     finalPrice: Double,
-    onBarChange: (String) -> Unit,
-    onTapaChange: (String) -> Unit,
-    onPriceChange: (String) -> Unit,
     onLikedChange: (Boolean) -> Unit,
     onStudentChange: (Boolean) -> Unit,
     onPublish: () -> Unit,
     onClear: () -> Unit,
+    onNextBar: () -> Unit,
+    onPreviousBar: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize().safeDrawingPadding(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Image(
@@ -60,48 +60,29 @@ internal fun RatingScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(start = 24.dp, end = 24.dp)
-                .safeDrawingPadding(),
+                .padding(start = 24.dp, end = 24.dp),
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
+
             Text(
-                text = stringResource(R.string.rate_it),
+                text = stringResource(R.string.app_title),
                 modifier = Modifier.fillMaxWidth(),
-                fontSize = 16.sp,
+                fontSize = 24.sp,
                 color = Calypso,
                 fontWeight = FontWeight.Bold
             )
 
-            GastroVoteTextField(
-                value = bar,
-                onValueChange = onBarChange,
-                placeholder = stringResource(R.string.bar_name),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Next
-                )
+            Text(
+                text = stringResource(R.string.app_subtitle),
+                modifier = Modifier.fillMaxWidth(),
+                fontSize = 16.sp,
+                color = CornflowerBlue,
+                fontWeight = FontWeight.Bold
             )
 
-            GastroVoteTextField(
-                value = tapa,
-                onValueChange = onTapaChange,
-                placeholder = stringResource(R.string.tapa_name),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Next
-                )
-            )
+            BarSelector(bar = bar, onNextBar = onNextBar, onPreviousBar = onPreviousBar)
 
-            GastroVoteTextField(
-                value = priceText,
-                onValueChange = onPriceChange,
-                placeholder = stringResource(R.string.tapa_price),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Done
-                )
-            )
-
+            TapaCard(tapa)
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
@@ -164,8 +145,8 @@ internal fun RatingScreen(
 
             RatingSummary(
                 bar = bar,
-                tapa = tapa,
-                priceText = priceText,
+                tapa = tapa.name,
+                originalPrice = originalPrice,
                 liked = liked,
                 finalPrice = finalPrice,
                 isStudent = isStudent
@@ -175,10 +156,71 @@ internal fun RatingScreen(
 }
 
 @Composable
+private fun TapaCard(tapa: Tapa) {
+    Column() {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            Text(text = tapa.name)
+            Image(painterResource(R.drawable.favourite), null)
+        }
+
+        Text(text=tapa.description)
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            Text(text = tapa.price.toString())
+            Text(text = "Stars rating here")
+        }
+    }
+}
+@Composable
+private fun BarSelector(
+    bar: String,
+    onNextBar: () -> Unit,
+    onPreviousBar: () -> Unit
+) {
+    Column() {
+        Text(
+            text = stringResource(R.string.choose_bar),
+            modifier = Modifier.fillMaxWidth(),
+            fontSize = 16.sp,
+            color = CornflowerBlue,
+            fontWeight = FontWeight.Bold
+        )
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            FilledTonalButton(
+                onClick = onPreviousBar
+            ) {
+                Image(painter = painterResource(R.drawable.arrow_left), contentDescription = null)
+            }
+
+            Text(text = bar, fontSize = 16.sp, color = CornflowerBlue)
+
+            FilledTonalButton(
+                onClick = onNextBar
+            ) {
+                Image(painter = painterResource(R.drawable.arrow_right), contentDescription = null)
+            }
+        }
+    }
+}
+
+@Composable
 private fun RatingSummary(
     bar: String,
     tapa: String,
-    priceText: String,
+    originalPrice: Double,
     finalPrice: Double,
     liked: Boolean,
     isStudent: Boolean
@@ -196,31 +238,9 @@ private fun RatingSummary(
     ) {
         Text(text = stringResource(R.string.summary_tapa, tapa), fontSize = 12.sp)
         Text(text = stringResource(R.string.summary_bar, bar), fontSize = 12.sp)
-        Text(text = stringResource(R.string.summary_price, priceText), fontSize = 12.sp)
+        Text(text = stringResource(R.string.summary_price, originalPrice.toString()), fontSize = 12.sp)
         Text(text = stringResource(R.string.summary_discount, discount), fontSize = 12.sp)
         Text(text = stringResource(R.string.summary_final_price, finalPrice), fontSize = 12.sp)
         Text(text = stringResource(R.string.summary_liked, like), fontSize = 12.sp)
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun RatingScreenPreview() {
-    GastroVoteTheme {
-        RatingScreen(
-            bar = "Bar Pepe",
-            tapa = "Patatas bravas",
-            priceText = "8,50",
-            liked = true,
-            isStudent = true,
-            finalPrice = 7.65,
-            onBarChange = {},
-            onTapaChange = {},
-            onPriceChange = {},
-            onLikedChange = {},
-            onStudentChange = {},
-            onPublish = {},
-            onClear = {}
-        )
     }
 }

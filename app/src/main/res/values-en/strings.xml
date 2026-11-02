@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Gastro Vote</string>
     <string name="app_title">GastroVote</string>
-    <string name="rate_it">Rate your tapa</string>
+    <string name="app_subtitle">Ruta de la tapa</string>
     <string name="tapa_name">Tapa name</string>
-    <string name="bar_name">Bar name</string>
+    <string name="choose_bar">Choose a bar</string>
     <string name="tapa_price">Price ($)</string>
     <string name="i_like_it">I like it</string>
     <string name="did_you_like_it">Did you like it?</string>
