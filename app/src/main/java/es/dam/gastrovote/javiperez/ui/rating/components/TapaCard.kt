@@ -1,0 +1,108 @@
+package es.dam.gastrovote.javiperez.ui.rating.components
+
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import es.dam.gastrovote.javiperez.R
+import es.dam.gastrovote.javiperez.domain.model.Tapa
+import es.dam.gastrovote.javiperez.ui.theme.Calypso
+import es.dam.gastrovote.javiperez.ui.theme.Calypso80
+import es.dam.gastrovote.javiperez.ui.theme.CornflowerBlue
+import es.dam.gastrovote.javiperez.ui.theme.Zircon
+
+@Composable
+internal fun TapaInfoCard(tapa: Tapa) {
+    val locale = LocalConfiguration.current.locales[0]
+    val tapaPrice = "%.2f".format(locale, tapa.price)
+    var favourite by rememberSaveable(tapa.id) { mutableStateOf(tapa.favourite) }
+
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Zircon),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        border = BorderStroke(1.dp, CornflowerBlue)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    text = tapa.name,
+                    modifier = Modifier.weight(1f),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = Calypso
+                )
+
+                IconButton(onClick = { favourite = !favourite }) {
+                    Image(
+                        painter = painterResource(
+                            if (favourite) R.drawable.favourite else R.drawable.not_favourite
+                        ),
+                        contentDescription = stringResource(R.string.favourite),
+                        modifier = Modifier.size(26.dp)
+                    )
+                }
+            }
+
+            Text(
+                text = tapa.description,
+                style = MaterialTheme.typography.bodyMedium,
+                color = Calypso80
+            )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                Text(
+                    text = "$tapaPrice €",
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = Calypso
+                )
+
+                Column(
+                    horizontalAlignment = Alignment.End,
+                    verticalArrangement = Arrangement.spacedBy(2.dp)
+                ) {
+                    StarRow(
+                        rating = 4,
+                        starSize = 18.sp
+                    )
+                }
+            }
+        }
+    }
+}

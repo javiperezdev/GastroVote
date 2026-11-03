@@ -2,20 +2,27 @@ package es.dam.gastrovote.javiperez.ui.components
 
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.sp
 
 @Composable
-internal fun GastroVoteButton(buttonContent: String, onClick: () -> Unit, color: Color) {
+internal fun GastroButton(
+    buttonContent: String,
+    onClick: () -> Unit,
+    color: Color,
+    modifier: Modifier = Modifier
+) {
     Button(
         onClick = onClick,
+        modifier = modifier,
         colors = ButtonDefaults.buttonColors(color)
     ) {
         Text(
             text = buttonContent,
-            fontSize = 16.sp
+            style = MaterialTheme.typography.labelLarge
         )
     }
 }

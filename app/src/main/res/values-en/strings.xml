@@ -12,12 +12,12 @@
     <string name="post_review">Post review</string>
     <string name="student_discount">Student discount (10%)</string>
     <string name="resume">Final prices will appear here</string>
-    <string name="summary_tapa">Tapa: %1$s</string>
-    <string name="summary_bar">Bar: %1$s</string>
-    <string name="summary_price">Price: %1$s</string>
-    <string name="summary_discount">Discount: %1$s</string>
-    <string name="summary_final_price">Final Price: %1$s</string>
-    <string name="summary_liked">Liked: %1$s</string>
+    <string name="summary_tapa">Tapa:</string>
+    <string name="summary_bar">Bar:</string>
+    <string name="summary_price">Price:</string>
+    <string name="summary_discount">Discount:</string>
+    <string name="summary_final_price">Final price:</string>
+    <string name="summary_liked">Liked:</string>
     <string name="discount_with_student">10%</string>
     <string name="discount_without_student">0%</string>
     <string name="yes">Yes</string>
@@ -26,4 +26,49 @@
     <string name="price_calculated">Price calculated</string>
     <string name="error_bar_and_tapa">Enter the bar and the tapa</string>
     <string name="error_invalid_price">The price is not valid</string>
+
+    <string name="bar_position">Bar %1$s of %2$s</string>
+    <string name="previous_bar">Previous bar</string>
+    <string name="next_bar">Next bar</string>
+    <string name="tapa_price_base">Base price: %1$s €</string>
+    <string name="average_rating">Average rating %1$s</string>
+    <string name="favourite">Favourite</string>
+    <string name="your_review">Your review</string>
+    <string name="size">Size</string>
+    <string name="size_tapa">Tapa</string>
+    <string name="size_half">Half portion</string>
+    <string name="size_full">Full portion</string>
+    <string name="rating">Rating</string>
+    <string name="rating_none">Not rated</string>
+    <string name="rating_poor">Could be better</string>
+    <string name="rating_ok">Correct</string>
+    <string name="rating_good">Very good!</string>
+    <string name="rating_excellent">Outstanding!</string>
+    <string name="quality_price">Value for money</string>
+    <string name="tags">Tags</string>
+    <string name="tag_vegetarian">Vegetarian</string>
+    <string name="tag_gluten_free">Gluten free</string>
+    <string name="tag_spicy">Spicy</string>
+    <string name="comment">Comment</string>
+    <string name="comment_hint">Tell us what you thought (optional)</string>
+    <string name="none">None</string>
+    <string name="price_format">€%1$s</string>
+    <string name="summary_size">Size:</string>
+    <string name="summary_rating">Rating:</string>
+    <string name="summary_quality_price">Value for money:</string>
+    <string name="summary_tags">Tags:</string>
+    <string name="summary_comment">Comment:</string>
+    <string name="summary_and_progress">Summary and progress</string>
+    <string name="route_progress">Route: %1$s of %2$s bars</string>
+
+    <string-array name="bar_average_ratings">
+        <item>4.5</item>
+        <item>4.0</item>
+        <item>4.8</item>
+        <item>4.3</item>
+        <item>4.6</item>
+        <item>4.1</item>
+        <item>4.7</item>
+        <item>4.4</item>
+    </string-array>
 </resources>

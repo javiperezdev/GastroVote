@@ -1,44 +1,58 @@
 package es.dam.gastrovote.javiperez.ui.rating
 
-import android.graphics.Paint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Switch
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import es.dam.gastrovote.javiperez.R
 import es.dam.gastrovote.javiperez.domain.model.Tapa
-import es.dam.gastrovote.javiperez.ui.components.GastroVoteButton
-import es.dam.gastrovote.javiperez.ui.theme.Calypso
+import es.dam.gastrovote.javiperez.ui.rating.components.BarSelector
+import es.dam.gastrovote.javiperez.ui.rating.components.LikeSwitchRow
+import es.dam.gastrovote.javiperez.ui.rating.components.RatingActionButtons
+import es.dam.gastrovote.javiperez.ui.rating.components.RatingHeader
+import es.dam.gastrovote.javiperez.ui.rating.components.RatingSummaryCard
+import es.dam.gastrovote.javiperez.ui.rating.components.ReviewForm
+import es.dam.gastrovote.javiperez.ui.rating.components.RouteProgress
+import es.dam.gastrovote.javiperez.ui.rating.components.SectionTitle
+import es.dam.gastrovote.javiperez.ui.rating.components.StudentDiscountRow
+import es.dam.gastrovote.javiperez.ui.rating.components.TapaInfoCard
 import es.dam.gastrovote.javiperez.ui.theme.CornflowerBlue
-import es.dam.gastrovote.javiperez.ui.theme.GastroVoteTheme
+import kotlin.math.roundToInt
 
 @Composable
 internal fun RatingScreen(
     bar: String,
     tapa: Tapa,
+    totalBars: Int,
     originalPrice: Double,
     liked: Boolean,
     isStudent: Boolean,
     finalPrice: Double,
+    selectedSize: TapaSize,
+    onSizeChange: (TapaSize) -> Unit,
+    rating: Int,
+    qualityPrice: Float,
+    onQualityPriceChange: (Float) -> Unit,
+    vegetarian: Boolean,
+    onVegetarianChange: (Boolean) -> Unit,
+    glutenFree: Boolean,
+    onGlutenFreeChange: (Boolean) -> Unit,
+    spicy: Boolean,
+    onSpicyChange: (Boolean) -> Unit,
+    comment: String,
+    onCommentChange: (String) -> Unit,
     onLikedChange: (Boolean) -> Unit,
     onStudentChange: (Boolean) -> Unit,
     onPublish: () -> Unit,
@@ -48,8 +62,10 @@ internal fun RatingScreen(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.fillMaxSize().safeDrawingPadding(),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        modifier = modifier
+            .fillMaxSize()
+            .safeDrawingPadding()
+            .verticalScroll(rememberScrollState())
     ) {
         Image(
             painter = painterResource(R.drawable.gastro_vote_banner),
@@ -59,188 +75,76 @@ internal fun RatingScreen(
 
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(start = 24.dp, end = 24.dp),
-            verticalArrangement = Arrangement.spacedBy(4.dp),
+                .fillMaxWidth()
+                .padding(horizontal = 24.dp, vertical = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            RatingHeader()
 
-            Text(
-                text = stringResource(R.string.app_title),
-                modifier = Modifier.fillMaxWidth(),
-                fontSize = 24.sp,
-                color = Calypso,
-                fontWeight = FontWeight.Bold
+            BarSelector(
+                bar = bar,
+                position = tapa.id,
+                total = totalBars,
+                onNextBar = onNextBar,
+                onPreviousBar = onPreviousBar
             )
 
-            Text(
-                text = stringResource(R.string.app_subtitle),
-                modifier = Modifier.fillMaxWidth(),
-                fontSize = 16.sp,
-                color = CornflowerBlue,
-                fontWeight = FontWeight.Bold
+            TapaInfoCard(tapa = tapa)
+
+            SectionTitle(text = stringResource(R.string.your_review))
+
+            ReviewForm(
+                selectedSize = selectedSize,
+                onSizeChange = onSizeChange,
+                rating = rating,
+                qualityPrice = qualityPrice,
+                onQualityPriceChange = onQualityPriceChange,
+                vegetarian = vegetarian,
+                onVegetarianChange = onVegetarianChange,
+                glutenFree = glutenFree,
+                onGlutenFreeChange = onGlutenFreeChange,
+                spicy = spicy,
+                onSpicyChange = onSpicyChange,
+                comment = comment,
+                onCommentChange = onCommentChange
             )
 
-            BarSelector(bar = bar, onNextBar = onNextBar, onPreviousBar = onPreviousBar)
+            LikeSwitchRow(liked = liked, onLikedChange = onLikedChange)
 
-            TapaCard(tapa)
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(32.dp)
-            ) {
-                Text(
-                    text = stringResource(R.string.i_like_it),
-                    fontSize = 12.sp
-                )
+            StudentDiscountRow(isStudent = isStudent, onStudentChange = onStudentChange)
 
-                Switch(
-                    checked = liked,
-                    onCheckedChange = onLikedChange
-                )
+            RatingActionButtons(
+                onClear = onClear,
+                onPublish = onPublish
+            )
 
-                Text(
-                    text = stringResource(if (liked) R.string.you_like_it else R.string.did_you_like_it),
-                    fontSize = 12.sp,
-                )
-            }
+            SectionTitle(text = stringResource(R.string.summary_and_progress))
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = stringResource(R.string.student_discount),
-                    fontSize = 12.sp
-                )
-                Checkbox(
-                    checked = isStudent,
-                    onCheckedChange = onStudentChange
-                )
-            }
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                GastroVoteButton(
-                    onClick = onClear,
-                    buttonContent = stringResource(R.string.clean),
-                    color = Calypso
-                )
-
-                GastroVoteButton(
-                    onClick = onPublish,
-                    buttonContent = stringResource(R.string.post_review),
-                    color = CornflowerBlue
-                )
-            }
+            RouteProgress(reviewedBars = 0, totalBars = totalBars)
 
             if (finalPrice == -1.0) {
                 Text(
                     text = stringResource(R.string.resume),
-                    fontSize = 12.sp
+                    style = MaterialTheme.typography.bodySmall,
+                    color = CornflowerBlue
                 )
             }
 
-            RatingSummary(
+            RatingSummaryCard(
                 bar = bar,
                 tapa = tapa.name,
                 originalPrice = originalPrice,
                 liked = liked,
                 finalPrice = finalPrice,
-                isStudent = isStudent
+                isStudent = isStudent,
+                size = stringResource(selectedSize.labelRes),
+                rating = rating,
+                qualityPrice = qualityPrice.roundToInt(),
+                vegetarian = vegetarian,
+                glutenFree = glutenFree,
+                spicy = spicy,
+                comment = comment
             )
         }
-    }
-}
-
-@Composable
-private fun TapaCard(tapa: Tapa) {
-    Column() {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-            Text(text = tapa.name)
-            Image(painterResource(R.drawable.favourite), null)
-        }
-
-        Text(text=tapa.description)
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-            Text(text = tapa.price.toString())
-            Text(text = "Stars rating here")
-        }
-    }
-}
-@Composable
-private fun BarSelector(
-    bar: String,
-    onNextBar: () -> Unit,
-    onPreviousBar: () -> Unit
-) {
-    Column() {
-        Text(
-            text = stringResource(R.string.choose_bar),
-            modifier = Modifier.fillMaxWidth(),
-            fontSize = 16.sp,
-            color = CornflowerBlue,
-            fontWeight = FontWeight.Bold
-        )
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-            FilledTonalButton(
-                onClick = onPreviousBar
-            ) {
-                Image(painter = painterResource(R.drawable.arrow_left), contentDescription = null)
-            }
-
-            Text(text = bar, fontSize = 16.sp, color = CornflowerBlue)
-
-            FilledTonalButton(
-                onClick = onNextBar
-            ) {
-                Image(painter = painterResource(R.drawable.arrow_right), contentDescription = null)
-            }
-        }
-    }
-}
-
-@Composable
-private fun RatingSummary(
-    bar: String,
-    tapa: String,
-    originalPrice: Double,
-    finalPrice: Double,
-    liked: Boolean,
-    isStudent: Boolean
-) {
-    if (finalPrice == -1.0) return
-
-    val discount = stringResource(
-        if (isStudent) R.string.discount_with_student else R.string.discount_without_student
-    )
-    val like = stringResource(if (liked) R.string.yes else R.string.no)
-
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(4.dp)
-    ) {
-        Text(text = stringResource(R.string.summary_tapa, tapa), fontSize = 12.sp)
-        Text(text = stringResource(R.string.summary_bar, bar), fontSize = 12.sp)
-        Text(text = stringResource(R.string.summary_price, originalPrice.toString()), fontSize = 12.sp)
-        Text(text = stringResource(R.string.summary_discount, discount), fontSize = 12.sp)
-        Text(text = stringResource(R.string.summary_final_price, finalPrice), fontSize = 12.sp)
-        Text(text = stringResource(R.string.summary_liked, like), fontSize = 12.sp)
     }
 }
