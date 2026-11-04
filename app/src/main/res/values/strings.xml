@@ -26,7 +26,6 @@
     <string name="price_calculated">Precio calculado</string>
     <string name="error_bar_and_tapa">Indica el bar y la tapa</string>
     <string name="error_invalid_price">El precio no es valido</string>
-
     <string name="bar_position">Bar %1$s de %2$s</string>
     <string name="previous_bar">Bar anterior</string>
     <string name="next_bar">Bar siguiente</string>
@@ -60,4 +59,6 @@
     <string name="summary_comment">Comentario:</string>
     <string name="summary_and_progress">Resumen y progreso</string>
     <string name="route_progress">Ruta: %1$s de %2$s bares</string>
+    <string name="added_favourite">Añadido a favoritos</string>
+    <string name="removed_favourite">Eliminado de favoritos</string>
 </resources>

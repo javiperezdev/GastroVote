@@ -60,6 +60,8 @@ internal fun RatingScreen(
     onClear: () -> Unit,
     onNextBar: () -> Unit,
     onPreviousBar: () -> Unit,
+    onFavouriteChange: () -> Unit,
+    isFavourite: Boolean,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -90,7 +92,7 @@ internal fun RatingScreen(
                 onPreviousBar = onPreviousBar
             )
 
-            TapaInfoCard(tapa = tapa)
+            TapaInfoCard(tapa = tapa, isFavourite = isFavourite, onFavouriteChange = onFavouriteChange)
 
             SectionTitle(text = stringResource(R.string.your_review))
 

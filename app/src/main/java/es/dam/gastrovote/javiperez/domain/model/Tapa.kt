@@ -6,7 +6,6 @@ data class Tapa (
     val description: String,
     val price: Double,
     val rating: Int,
-    val favourite: Boolean = false,
     val size: TapaSize = TapaSize.TAPA,
 )
 

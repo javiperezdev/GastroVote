@@ -19,6 +19,7 @@ import es.dam.gastrovote.javiperez.data.BarRepository
 import es.dam.gastrovote.javiperez.domain.calculate
 import es.dam.gastrovote.javiperez.domain.model.TapaSize
 
+
 @Composable
 fun RatingRoute(modifier: Modifier = Modifier) {
     var currentBarIndex by rememberSaveable { mutableIntStateOf(0) }
@@ -33,9 +34,9 @@ fun RatingRoute(modifier: Modifier = Modifier) {
 
     var selectedSize by rememberSaveable(bar.id) { mutableStateOf(TapaSize.TAPA) }
     var rating by rememberSaveable(bar.id) { mutableIntStateOf(0) }
-    var qualityPrice by rememberSaveable(bar.id) {
-        mutableFloatStateOf(5f)
-    }
+    var qualityPrice by rememberSaveable(bar.id) {mutableFloatStateOf(5f) }
+    var isBarFavourite by rememberSaveable { mutableStateOf(mapOf<Int, Boolean>()) }
+
     var vegetarian by rememberSaveable(bar.id) { mutableStateOf(false) }
     var glutenFree by rememberSaveable(bar.id) { mutableStateOf(false) }
     var spicy by rememberSaveable(bar.id) { mutableStateOf(false) }
@@ -45,6 +46,11 @@ fun RatingRoute(modifier: Modifier = Modifier) {
 
     val studentReminder = stringResource(R.string.student_card_reminder)
     val priceCalculated = stringResource(R.string.price_calculated)
+    val addedFavourite = stringResource(R.string.added_favourite)
+    val removedFavourite = stringResource(R.string.removed_favourite)
+
+
+    val isFavourite = isBarFavourite[bar.id] ?: false
 
     RatingScreen(
         bar = bar.name,
@@ -110,6 +116,14 @@ fun RatingRoute(modifier: Modifier = Modifier) {
         onPreviousBar = {
             currentBarIndex = (currentBarIndex - 1 + bars.size) % bars.size
         },
+        onFavouriteChange = {
+            // Create a new map with the new pair if it doesn't exist
+            isBarFavourite = isBarFavourite + (bar.id to !isFavourite)
+
+            val toastText = if (!isFavourite) addedFavourite else removedFavourite
+            showToast(text = toastText, context = context)
+        },
+        isFavourite = isFavourite,
         modifier = modifier
     )
 }

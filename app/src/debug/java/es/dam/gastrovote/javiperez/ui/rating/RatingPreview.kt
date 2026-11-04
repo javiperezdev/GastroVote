@@ -5,7 +5,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import es.dam.gastrovote.javiperez.domain.model.Tapa
-import es.dam.gastrovote.javiperez.domain.model.TapaSize
 import es.dam.gastrovote.javiperez.ui.theme.GastroVoteTheme
 
 data class RatingPreviewState(
@@ -35,7 +34,6 @@ private fun RatingScreenPreview(
         name = "Marinera murciana",
         description = "Rosquilla crujiente con ensaladilla rusa y una anchoa.",
         price = 3.50,
-        size = TapaSize.TAPA,
         rating = 5
     )
     GastroVoteTheme(darkTheme = false, dynamicColor = false) {
@@ -65,7 +63,9 @@ private fun RatingScreenPreview(
             onPublish = {},
             onClear = {},
             onNextBar = {},
-            onPreviousBar = {}
+            onPreviousBar = {},
+            onFavouriteChange = {},
+            isFavourite = false
         )
     }
 }

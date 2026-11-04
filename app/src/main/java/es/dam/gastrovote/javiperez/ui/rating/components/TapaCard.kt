@@ -15,10 +15,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -35,10 +31,9 @@ import es.dam.gastrovote.javiperez.ui.theme.CornflowerBlue
 import es.dam.gastrovote.javiperez.ui.theme.Zircon
 
 @Composable
-internal fun TapaInfoCard(tapa: Tapa) {
+internal fun TapaInfoCard(tapa: Tapa, isFavourite: Boolean, onFavouriteChange: () -> Unit) {
     val locale = LocalConfiguration.current.locales[0]
     val tapaPrice = "%.2f".format(locale, tapa.price)
-    var favourite by rememberSaveable(tapa.id) { mutableStateOf(tapa.favourite) }
 
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -64,10 +59,10 @@ internal fun TapaInfoCard(tapa: Tapa) {
                     color = Calypso
                 )
 
-                IconButton(onClick = { favourite = !favourite }) {
+                IconButton(onClick = onFavouriteChange) {
                     Image(
                         painter = painterResource(
-                            if (favourite) R.drawable.favourite else R.drawable.not_favourite
+                            if (isFavourite) R.drawable.favourite else R.drawable.not_favourite
                         ),
                         contentDescription = stringResource(R.string.favourite),
                         modifier = Modifier.size(26.dp)
