@@ -27,9 +27,9 @@ fun RatingRoute(modifier: Modifier = Modifier) {
     val tapa = bar.tapa
     val originalPrice = tapa.price
 
-    var finalPrice by rememberSaveable { mutableDoubleStateOf(-1.0) }
-    var liked by rememberSaveable { mutableStateOf(false) }
-    var isStudent by rememberSaveable { mutableStateOf(false) }
+    var finalPrice by rememberSaveable(bar.id) { mutableDoubleStateOf(-1.0) }
+    var liked by rememberSaveable(bar.id) { mutableStateOf(false) }
+    var isStudent by rememberSaveable(bar.id) { mutableStateOf(false) }
 
     var selectedSize by rememberSaveable(bar.id) { mutableStateOf(TapaSize.TAPA) }
     var rating by rememberSaveable(bar.id) { mutableIntStateOf(0) }
