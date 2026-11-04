@@ -18,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import es.dam.gastrovote.javiperez.R
 import es.dam.gastrovote.javiperez.domain.model.Tapa
+import es.dam.gastrovote.javiperez.domain.model.TapaSize
 import es.dam.gastrovote.javiperez.ui.rating.components.BarSelector
 import es.dam.gastrovote.javiperez.ui.rating.components.LikeSwitchRow
 import es.dam.gastrovote.javiperez.ui.rating.components.RatingActionButtons
@@ -137,8 +138,7 @@ internal fun RatingScreen(
                 liked = liked,
                 finalPrice = finalPrice,
                 isStudent = isStudent,
-                size = stringResource(selectedSize.labelRes),
-                rating = rating,
+                size = selectedSize,
                 qualityPrice = qualityPrice.roundToInt(),
                 vegetarian = vegetarian,
                 glutenFree = glutenFree,

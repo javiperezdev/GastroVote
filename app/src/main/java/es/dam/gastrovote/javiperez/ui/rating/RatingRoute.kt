@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import es.dam.gastrovote.javiperez.R
 import es.dam.gastrovote.javiperez.data.BarRepository
 import es.dam.gastrovote.javiperez.domain.calculate
+import es.dam.gastrovote.javiperez.domain.model.TapaSize
 
 @Composable
 fun RatingRoute(modifier: Modifier = Modifier) {
@@ -81,7 +82,7 @@ fun RatingRoute(modifier: Modifier = Modifier) {
             val result = calculateFinalPrice(
                 originalPrice = originalPrice,
                 isStudent = isStudent,
-                context = context
+                tapaSize = selectedSize
             )
             finalPrice = result
             if (result != -1.0) {
@@ -116,14 +117,9 @@ fun RatingRoute(modifier: Modifier = Modifier) {
 private fun calculateFinalPrice(
     isStudent: Boolean,
     originalPrice: Double,
-    context: Context
+    tapaSize: TapaSize,
 ): Double {
-    if (originalPrice <= 0) {
-        showToast(text = context.getString(R.string.error_invalid_price), context = context)
-        return -1.0
-    } else {
-        return calculate(basePrice = originalPrice, isStudent = isStudent)
-    }
+    return calculate(basePrice = originalPrice, isStudent = isStudent, tapaSize = tapaSize)
 }
 
 private fun showToast(text: String, context: Context) {

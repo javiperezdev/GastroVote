@@ -12,6 +12,9 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import es.dam.gastrovote.javiperez.R
+import es.dam.gastrovote.javiperez.domain.getMultiplier
+import es.dam.gastrovote.javiperez.domain.model.TapaSize
+import es.dam.gastrovote.javiperez.ui.asString
 import es.dam.gastrovote.javiperez.ui.theme.CornflowerBlue08
 
 @Composable
@@ -22,8 +25,7 @@ internal fun RatingSummaryCard(
     finalPrice: Double,
     liked: Boolean,
     isStudent: Boolean,
-    size: String,
-    rating: Int,
+    size: TapaSize,
     qualityPrice: Int,
     vegetarian: Boolean,
     glutenFree: Boolean,
@@ -32,7 +34,7 @@ internal fun RatingSummaryCard(
 ) {
     if (finalPrice == -1.0) return
 
-    val locale = LocalConfiguration.current.locales[0]
+    val locale = LocalConfiguration.current.locales[0] // Get the first country selected in the device
     val discount = stringResource(
         if (isStudent) R.string.discount_with_student else R.string.discount_without_student
     )
@@ -45,7 +47,21 @@ internal fun RatingSummaryCard(
         listOf(stringResource(R.string.none))
     }.joinToString(", ")
     val commentText = if (comment.isBlank()) stringResource(R.string.none) else comment
-    val price = stringResource(R.string.price_format, "%.2f".format(locale, originalPrice))
+
+    /*
+    * Section dedicated price display (refactor may be interesting)
+    */
+
+    val basePrice = stringResource(R.string.price_format, "%.2f".format(locale, originalPrice))
+    val multiplier = getMultiplier(size)
+    val sizePrice = stringResource(R.string.price_format, "%.2f".format(locale, originalPrice * multiplier))
+
+    val price = when (size) {
+        TapaSize.TAPA -> basePrice
+        else -> {
+            "$basePrice x $multiplier = $sizePrice"
+        }
+    }
     val finalPriceText = stringResource(
         R.string.price_format,
         "%.2f".format(locale, finalPrice)
@@ -64,7 +80,7 @@ internal fun RatingSummaryCard(
         SummaryLine("${stringResource(R.string.summary_bar)} $bar")
         SummaryLine("${stringResource(R.string.summary_tapa)} $tapa")
         SummaryLine("${stringResource(R.string.summary_price)} $price")
-        SummaryLine("${stringResource(R.string.summary_size)} $size")
+        SummaryLine("${stringResource(R.string.summary_size)} ${size.asString()}")
         SummaryLine("${stringResource(R.string.summary_quality_price)} $qualityPrice/10")
         SummaryLine("${stringResource(R.string.summary_discount)} $discount")
         SummaryLine("${stringResource(R.string.summary_final_price)} $finalPriceText")

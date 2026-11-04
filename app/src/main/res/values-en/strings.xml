@@ -52,7 +52,7 @@
     <string name="comment">Comment</string>
     <string name="comment_hint">Tell us what you thought (optional)</string>
     <string name="none">None</string>
-    <string name="price_format">€%1$s</string>
+    <string name="price_format">%1$s €</string>
     <string name="summary_size">Size:</string>
     <string name="summary_rating">Rating:</string>
     <string name="summary_quality_price">Value for money:</string>

@@ -5,6 +5,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import es.dam.gastrovote.javiperez.domain.model.Tapa
+import es.dam.gastrovote.javiperez.domain.model.TapaSize
 import es.dam.gastrovote.javiperez.ui.theme.GastroVoteTheme
 
 data class RatingPreviewState(
@@ -29,21 +30,23 @@ class RatingPreviewStateProvider : PreviewParameterProvider<RatingPreviewState> 
 private fun RatingScreenPreview(
     @PreviewParameter(RatingPreviewStateProvider::class) state: RatingPreviewState
 ) {
+    val tapa = Tapa(
+        id = 1,
+        name = "Marinera murciana",
+        description = "Rosquilla crujiente con ensaladilla rusa y una anchoa.",
+        price = 3.50,
+        size = TapaSize.TAPA
+    )
     GastroVoteTheme(darkTheme = false, dynamicColor = false) {
         RatingScreen(
             bar = "La Taberna del Puerto",
-            tapa = Tapa(
-                id = 1,
-                name = "Marinera murciana",
-                description = "Rosquilla crujiente con ensaladilla rusa y una anchoa.",
-                price = 3.50
-            ),
+            tapa = tapa,
             totalBars = 8,
             originalPrice = 3.50,
             liked = state.liked,
             isStudent = state.isStudent,
             finalPrice = state.finalPrice,
-            selectedSize = TapaSize.TAPA,
+            selectedSize = tapa.size,
             onSizeChange = {},
             rating = 0,
             qualityPrice = 5f,

@@ -20,7 +20,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import es.dam.gastrovote.javiperez.R
-import es.dam.gastrovote.javiperez.ui.rating.TapaSize
+import es.dam.gastrovote.javiperez.domain.model.TapaSize
+import es.dam.gastrovote.javiperez.ui.asString
 import es.dam.gastrovote.javiperez.ui.theme.Calypso
 import es.dam.gastrovote.javiperez.ui.components.GastroTagCheckbox
 @Composable
@@ -54,7 +55,7 @@ internal fun ReviewForm(
                     colors = gastroSegmentedButtonColors(),
                     label = {
                         Text(
-                            text = stringResource(size.labelRes),
+                            text = size.asString(),
                             style = MaterialTheme.typography.labelSmall,
                             maxLines = 2, // maximum lines for the text to span
                             textAlign = TextAlign.Center
