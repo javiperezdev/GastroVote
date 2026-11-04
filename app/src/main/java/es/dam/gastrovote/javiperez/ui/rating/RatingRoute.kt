@@ -66,7 +66,7 @@ fun RatingRoute(modifier: Modifier = Modifier) {
         spicy = spicy,
         onSpicyChange = { spicy = it },
         comment = comment,
-        onCommentChange = { comment = it },
+        onCommentChange = { comment = it.take(200) },
         onLikedChange = { liked = it },
         onStudentChange = { checked ->
             isStudent = checked
