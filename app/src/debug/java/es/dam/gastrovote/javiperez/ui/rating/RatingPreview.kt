@@ -35,7 +35,8 @@ private fun RatingScreenPreview(
         name = "Marinera murciana",
         description = "Rosquilla crujiente con ensaladilla rusa y una anchoa.",
         price = 3.50,
-        size = TapaSize.TAPA
+        size = TapaSize.TAPA,
+        rating = 5
     )
     GastroVoteTheme(darkTheme = false, dynamicColor = false) {
         RatingScreen(

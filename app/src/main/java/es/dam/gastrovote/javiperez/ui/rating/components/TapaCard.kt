@@ -98,7 +98,7 @@ internal fun TapaInfoCard(tapa: Tapa) {
                     verticalArrangement = Arrangement.spacedBy(2.dp)
                 ) {
                     StarRow(
-                        rating = 4,
+                        rating = tapa.rating,
                         starSize = 18.sp
                     )
                 }

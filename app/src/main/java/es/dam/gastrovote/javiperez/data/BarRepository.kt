@@ -12,7 +12,8 @@ class BarRepository {
                 id = 1,
                 name = "Marinera murciana",
                 description = "Rosquilla crujiente con ensaladilla rusa y una anchoa.",
-                price = 3.50
+                price = 3.50,
+                rating = 4
             )
         ),
         Bar(
@@ -22,7 +23,8 @@ class BarRepository {
                 id = 2,
                 name = "Zarangollo",
                 description = "Revuelto tradicional de calabacín, cebolla y huevo.",
-                price = 4.00
+                price = 4.00,
+                rating = 4
             )
         ),
         Bar(
@@ -32,7 +34,8 @@ class BarRepository {
                 id = 3,
                 name = "Croqueta de jamón ibérico",
                 description = "Croqueta casera de bechamel cremosa con jamón ibérico.",
-                price = 2.80
+                price = 2.80,
+                rating = 5
             )
         ),
         Bar(
@@ -42,7 +45,8 @@ class BarRepository {
                 id = 4,
                 name = "Tosta de solomillo",
                 description = "Pan tostado con solomillo, queso de cabra y cebolla caramelizada.",
-                price = 5.50
+                price = 5.50,
+                rating = 4
             )
         ),
         Bar(
@@ -52,7 +56,8 @@ class BarRepository {
                 id = 5,
                 name = "Patatas bravas",
                 description = "Patatas doradas acompañadas de salsa brava casera y alioli.",
-                price = 3.00
+                price = 3.00,
+                rating = 3
             )
         ),
         Bar(
@@ -62,7 +67,8 @@ class BarRepository {
                 id = 6,
                 name = "Caballito murciano",
                 description = "Gamba rebozada en una fina capa crujiente.",
-                price = 3.80
+                price = 3.80,
+                rating = 4
             )
         ),
         Bar(
@@ -72,7 +78,8 @@ class BarRepository {
                 id = 7,
                 name = "Queso al horno",
                 description = "Queso de cabra horneado con miel y nueces.",
-                price = 4.50
+                price = 4.50,
+                rating = 5
             )
         ),
         Bar(
@@ -82,7 +89,8 @@ class BarRepository {
                 id = 8,
                 name = "Michirones",
                 description = "Habas secas guisadas al estilo murciano con chorizo y panceta.",
-                price = 4.00
+                price = 4.00,
+                rating = 4
             )
         )
     )

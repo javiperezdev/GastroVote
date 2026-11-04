@@ -60,15 +60,4 @@
     <string name="summary_comment">Comment:</string>
     <string name="summary_and_progress">Summary and progress</string>
     <string name="route_progress">Route: %1$s of %2$s bars</string>
-
-    <string-array name="bar_average_ratings">
-        <item>4.5</item>
-        <item>4.0</item>
-        <item>4.8</item>
-        <item>4.3</item>
-        <item>4.6</item>
-        <item>4.1</item>
-        <item>4.7</item>
-        <item>4.4</item>
-    </string-array>
 </resources>

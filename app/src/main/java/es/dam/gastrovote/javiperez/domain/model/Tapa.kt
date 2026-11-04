@@ -5,9 +5,9 @@ data class Tapa (
     val name: String,
     val description: String,
     val price: Double,
+    val rating: Int,
     val favourite: Boolean = false,
-    val size: TapaSize = TapaSize.TAPA
-    // val rating for further versions rating would go from 0-5
+    val size: TapaSize = TapaSize.TAPA,
 )
 
 enum class TapaSize {
