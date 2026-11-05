@@ -14,9 +14,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import es.dam.gastrovote.javiperez.R
-import es.dam.gastrovote.javiperez.ui.theme.Calypso
-import es.dam.gastrovote.javiperez.ui.theme.CornflowerBlue
-import es.dam.gastrovote.javiperez.ui.theme.CornflowerBlue20
 
 @Composable
 internal fun RouteProgress(
@@ -31,7 +28,7 @@ internal fun RouteProgress(
                 totalBars.toString()
             ),
             style = MaterialTheme.typography.labelMedium,
-            color = Calypso
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
 
         LinearProgressIndicator(
@@ -40,8 +37,8 @@ internal fun RouteProgress(
                 .fillMaxWidth()
                 .height(10.dp)
                 .clip(RoundedCornerShape(5.dp)),
-            color = CornflowerBlue,
-            trackColor = CornflowerBlue20
+            color = MaterialTheme.colorScheme.primary,
+            trackColor = MaterialTheme.colorScheme.primaryContainer
         )
     }
 }

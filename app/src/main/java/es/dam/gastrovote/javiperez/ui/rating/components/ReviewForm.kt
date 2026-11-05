@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.sp
 import es.dam.gastrovote.javiperez.R
 import es.dam.gastrovote.javiperez.domain.model.TapaSize
 import es.dam.gastrovote.javiperez.ui.asString
-import es.dam.gastrovote.javiperez.ui.theme.Calypso
 import es.dam.gastrovote.javiperez.ui.components.GastroTagCheckbox
 @Composable
 internal fun ReviewForm(
@@ -87,7 +86,7 @@ internal fun ReviewForm(
             Text(
                 text = "${qualityPrice.toInt()}/10",
                 style = MaterialTheme.typography.labelMedium,
-                color = Calypso
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
 

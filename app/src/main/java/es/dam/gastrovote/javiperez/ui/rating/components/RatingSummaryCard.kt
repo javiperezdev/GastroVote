@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -15,7 +16,6 @@ import es.dam.gastrovote.javiperez.R
 import es.dam.gastrovote.javiperez.domain.getMultiplier
 import es.dam.gastrovote.javiperez.domain.model.TapaSize
 import es.dam.gastrovote.javiperez.ui.asString
-import es.dam.gastrovote.javiperez.ui.theme.CornflowerBlue08
 
 @Composable
 internal fun RatingSummaryCard(
@@ -71,7 +71,7 @@ internal fun RatingSummaryCard(
         modifier = Modifier
             .fillMaxWidth()
             .background(
-                color = CornflowerBlue08,
+                color = MaterialTheme.colorScheme.surfaceVariant,
                 shape = RoundedCornerShape(12.dp)
             )
             .padding(12.dp),

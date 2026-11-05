@@ -1,6 +1,7 @@
 package es.dam.gastrovote.javiperez.ui.rating
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,7 +30,6 @@ import es.dam.gastrovote.javiperez.ui.rating.components.RouteProgress
 import es.dam.gastrovote.javiperez.ui.rating.components.SectionTitle
 import es.dam.gastrovote.javiperez.ui.rating.components.StudentDiscountRow
 import es.dam.gastrovote.javiperez.ui.rating.components.TapaInfoCard
-import es.dam.gastrovote.javiperez.ui.theme.CornflowerBlue
 import kotlin.math.roundToInt
 
 @Composable
@@ -67,6 +67,7 @@ internal fun RatingScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
             .safeDrawingPadding()
             .verticalScroll(rememberScrollState())
     ) {
@@ -129,7 +130,7 @@ internal fun RatingScreen(
                 Text(
                     text = stringResource(R.string.resume),
                     style = MaterialTheme.typography.bodySmall,
-                    color = CornflowerBlue
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
 

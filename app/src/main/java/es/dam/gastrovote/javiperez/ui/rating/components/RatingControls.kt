@@ -14,8 +14,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import es.dam.gastrovote.javiperez.R
 import es.dam.gastrovote.javiperez.ui.components.GastroButton
-import es.dam.gastrovote.javiperez.ui.theme.Calypso
-import es.dam.gastrovote.javiperez.ui.theme.CornflowerBlue
 
 @Composable
 internal fun LikeSwitchRow(
@@ -27,10 +25,7 @@ internal fun LikeSwitchRow(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        Text(
-            text = stringResource(R.string.i_like_it),
-            style = MaterialTheme.typography.bodySmall
-        )
+        FieldLabel(text = stringResource(R.string.i_like_it))
 
         Switch(
             checked = liked,
@@ -44,7 +39,7 @@ internal fun LikeSwitchRow(
             ),
             modifier = Modifier.weight(1f),
             style = MaterialTheme.typography.bodySmall,
-            color = CornflowerBlue
+            color = MaterialTheme.colorScheme.primary
         )
     }
 }
@@ -58,10 +53,9 @@ internal fun StudentDiscountRow(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(
+        FieldLabel(
             text = stringResource(R.string.student_discount),
-            modifier = Modifier.weight(1f),
-            style = MaterialTheme.typography.bodySmall
+            modifier = Modifier.weight(1f)
         )
         Checkbox(
             checked = isStudent,
@@ -83,14 +77,14 @@ internal fun RatingActionButtons(
         GastroButton(
             onClick = onClear,
             buttonContent = stringResource(R.string.clean),
-            color = Calypso,
+            color = MaterialTheme.colorScheme.secondary,
             modifier = Modifier.weight(1f)
         )
 
         GastroButton(
             onClick = onPublish,
             buttonContent = stringResource(R.string.post_review),
-            color = CornflowerBlue,
+            color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.weight(1f)
         )
     }

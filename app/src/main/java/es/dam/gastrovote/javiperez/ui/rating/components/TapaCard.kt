@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -25,10 +26,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import es.dam.gastrovote.javiperez.R
 import es.dam.gastrovote.javiperez.domain.model.Tapa
-import es.dam.gastrovote.javiperez.ui.theme.Calypso
-import es.dam.gastrovote.javiperez.ui.theme.Calypso80
-import es.dam.gastrovote.javiperez.ui.theme.CornflowerBlue
-import es.dam.gastrovote.javiperez.ui.theme.Zircon
 
 @Composable
 internal fun TapaInfoCard(tapa: Tapa, isFavourite: Boolean, onFavouriteChange: () -> Unit) {
@@ -38,9 +35,9 @@ internal fun TapaInfoCard(tapa: Tapa, isFavourite: Boolean, onFavouriteChange: (
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Zircon),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-        border = BorderStroke(1.dp, CornflowerBlue)
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
     ) {
         Column(
             modifier = Modifier
@@ -56,7 +53,7 @@ internal fun TapaInfoCard(tapa: Tapa, isFavourite: Boolean, onFavouriteChange: (
                     text = tapa.name,
                     modifier = Modifier.weight(1f),
                     style = MaterialTheme.typography.titleMedium,
-                    color = Calypso
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 IconButton(onClick = onFavouriteChange) {
@@ -65,7 +62,12 @@ internal fun TapaInfoCard(tapa: Tapa, isFavourite: Boolean, onFavouriteChange: (
                             if (isFavourite) R.drawable.favourite else R.drawable.not_favourite
                         ),
                         contentDescription = stringResource(R.string.favourite),
-                        modifier = Modifier.size(26.dp)
+                        modifier = Modifier.size(26.dp),
+                        colorFilter = if (isFavourite) {
+                            null
+                        } else {
+                            ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
                     )
                 }
             }
@@ -73,7 +75,7 @@ internal fun TapaInfoCard(tapa: Tapa, isFavourite: Boolean, onFavouriteChange: (
             Text(
                 text = tapa.description,
                 style = MaterialTheme.typography.bodyMedium,
-                color = Calypso80
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             Row(
@@ -85,7 +87,7 @@ internal fun TapaInfoCard(tapa: Tapa, isFavourite: Boolean, onFavouriteChange: (
                     text = "$tapaPrice €",
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
-                    color = Calypso
+                    color = MaterialTheme.colorScheme.primary
                 )
 
                 Column(

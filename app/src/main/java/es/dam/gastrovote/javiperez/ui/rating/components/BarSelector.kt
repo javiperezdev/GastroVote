@@ -14,14 +14,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import es.dam.gastrovote.javiperez.R
-import es.dam.gastrovote.javiperez.ui.theme.Calypso
-import es.dam.gastrovote.javiperez.ui.theme.CornflowerBlue
-import es.dam.gastrovote.javiperez.ui.theme.Zircon
 
 @Composable
 internal fun BarSelector(
@@ -36,7 +34,7 @@ internal fun BarSelector(
             text = stringResource(R.string.choose_bar),
             modifier = Modifier.fillMaxWidth(),
             style = MaterialTheme.typography.titleSmall,
-            color = CornflowerBlue
+            color = MaterialTheme.colorScheme.primary
         )
 
         Row(
@@ -59,7 +57,7 @@ internal fun BarSelector(
                 Text(
                     text = bar,
                     style = MaterialTheme.typography.titleMedium,
-                    color = Calypso,
+                    color = MaterialTheme.colorScheme.onSurface,
                     textAlign = TextAlign.Center
                 )
                 Text(
@@ -69,7 +67,7 @@ internal fun BarSelector(
                         total.toString()
                     ),
                     style = MaterialTheme.typography.bodySmall,
-                    color = CornflowerBlue
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
 
@@ -89,14 +87,17 @@ private fun ArrowButton(
     onClick: () -> Unit
 ) {
     FilledTonalButton(
-        colors = ButtonDefaults.filledTonalButtonColors(containerColor = Zircon),
+        colors = ButtonDefaults.filledTonalButtonColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
         elevation = ButtonDefaults.filledTonalButtonElevation(defaultElevation = 2.dp),
-        border = BorderStroke(1.dp, CornflowerBlue),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
         onClick = onClick
     ) {
         Image(
             painter = painterResource(iconRes),
-            contentDescription = contentDescription
+            contentDescription = contentDescription,
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary)
         )
     }
 }

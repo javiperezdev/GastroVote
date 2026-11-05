@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import es.dam.gastrovote.javiperez.ui.rating.components.gastroCheckboxColors
-import es.dam.gastrovote.javiperez.ui.theme.Calypso
 
 @Composable
 internal fun GastroTagCheckbox(
@@ -29,7 +28,7 @@ internal fun GastroTagCheckbox(
         Text(
             text = label,
             style = MaterialTheme.typography.labelSmall,
-            color = Calypso,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             maxLines = 2
         )
     }

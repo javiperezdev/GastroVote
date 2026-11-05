@@ -2,22 +2,8 @@ package es.dam.gastrovote.javiperez.ui.rating
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import es.dam.gastrovote.javiperez.domain.model.Tapa
 import es.dam.gastrovote.javiperez.ui.theme.GastroVoteTheme
-
-data class RatingPreviewState(
-    val finalPrice: Double,
-    val liked: Boolean,
-    val isStudent: Boolean
-)
-
-class RatingPreviewStateProvider : PreviewParameterProvider<RatingPreviewState> {
-    override val values = sequenceOf(
-        RatingPreviewState(finalPrice = -1.0, liked = false, isStudent = false),
-    )
-}
 
 @Preview(
     name = "RatingScreen",
@@ -26,9 +12,7 @@ class RatingPreviewStateProvider : PreviewParameterProvider<RatingPreviewState> 
     heightDp = 1800
 )
 @Composable
-private fun RatingScreenPreview(
-    @PreviewParameter(RatingPreviewStateProvider::class) state: RatingPreviewState
-) {
+private fun RatingScreenPreview() {
     val tapa = Tapa(
         id = 1,
         name = "Marinera murciana",
@@ -36,15 +20,15 @@ private fun RatingScreenPreview(
         price = 3.50,
         rating = 5
     )
-    GastroVoteTheme(darkTheme = false, dynamicColor = false) {
+    GastroVoteTheme(darkTheme = true) {
         RatingScreen(
             bar = "La Taberna del Puerto",
             tapa = tapa,
             totalBars = 8,
             originalPrice = 3.50,
-            liked = state.liked,
-            isStudent = state.isStudent,
-            finalPrice = state.finalPrice,
+            liked = false,
+            isStudent = false,
+            finalPrice = -1.0,
             selectedSize = tapa.size,
             onSizeChange = {},
             rating = 0,

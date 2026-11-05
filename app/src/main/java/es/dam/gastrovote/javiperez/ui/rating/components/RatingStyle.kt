@@ -11,15 +11,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import es.dam.gastrovote.javiperez.ui.theme.Calypso
-import es.dam.gastrovote.javiperez.ui.theme.Calypso35
-import es.dam.gastrovote.javiperez.ui.theme.Calypso50
-import es.dam.gastrovote.javiperez.ui.theme.Calypso60
-import es.dam.gastrovote.javiperez.ui.theme.Calypso75
-import es.dam.gastrovote.javiperez.ui.theme.CornflowerBlue
-import es.dam.gastrovote.javiperez.ui.theme.CornflowerBlue20
-import es.dam.gastrovote.javiperez.ui.theme.CornflowerBlue40
-import es.dam.gastrovote.javiperez.ui.theme.CornflowerBlue45
 
 @Composable
 internal fun SectionTitle(text: String) {
@@ -27,16 +18,17 @@ internal fun SectionTitle(text: String) {
         text = text,
         modifier = Modifier.fillMaxWidth(),
         style = MaterialTheme.typography.titleSmall,
-        color = CornflowerBlue
+        color = MaterialTheme.colorScheme.primary
     )
 }
 
 @Composable
-internal fun FieldLabel(text: String) {
+internal fun FieldLabel(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
+        modifier = modifier,
         style = MaterialTheme.typography.labelMedium,
-        color = Calypso
+        color = MaterialTheme.colorScheme.onSurfaceVariant
     )
 }
 
@@ -44,53 +36,54 @@ internal fun FieldLabel(text: String) {
 internal fun SummaryLine(text: String) {
     Text(
         text = text,
-        style = MaterialTheme.typography.bodySmall
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant
     )
 }
 
 @Composable
 internal fun gastroCheckboxColors() = CheckboxDefaults.colors(
-    checkedColor = CornflowerBlue,
-    uncheckedColor = Calypso60,
-    checkmarkColor = Color.White
+    checkedColor = MaterialTheme.colorScheme.primary,
+    uncheckedColor = MaterialTheme.colorScheme.onSurfaceVariant,
+    checkmarkColor = MaterialTheme.colorScheme.onPrimary
 )
 
 @Composable
 internal fun gastroSwitchColors() = SwitchDefaults.colors(
-    checkedThumbColor = Color.White,
-    checkedTrackColor = CornflowerBlue,
-    checkedBorderColor = CornflowerBlue,
-    checkedIconColor = Color.White,
-    uncheckedThumbColor = Color.White,
-    uncheckedTrackColor = Calypso35,
-    uncheckedBorderColor = Calypso50,
-    uncheckedIconColor = Calypso
+    checkedThumbColor = MaterialTheme.colorScheme.onPrimary,
+    checkedTrackColor = MaterialTheme.colorScheme.primary,
+    checkedBorderColor = MaterialTheme.colorScheme.primary,
+    checkedIconColor = MaterialTheme.colorScheme.onPrimary,
+    uncheckedThumbColor = MaterialTheme.colorScheme.outline,
+    uncheckedTrackColor = MaterialTheme.colorScheme.surfaceVariant,
+    uncheckedBorderColor = MaterialTheme.colorScheme.outline,
+    uncheckedIconColor = MaterialTheme.colorScheme.onSurfaceVariant
 )
 
 @Composable
 internal fun gastroSliderColors() = SliderDefaults.colors(
-    thumbColor = CornflowerBlue,
-    activeTrackColor = CornflowerBlue,
-    activeTickColor = Color.White,
-    inactiveTrackColor = CornflowerBlue20,
-    inactiveTickColor = CornflowerBlue40
+    thumbColor = MaterialTheme.colorScheme.primary,
+    activeTrackColor = MaterialTheme.colorScheme.primary,
+    activeTickColor = MaterialTheme.colorScheme.onPrimary,
+    inactiveTrackColor = MaterialTheme.colorScheme.surfaceVariant,
+    inactiveTickColor = MaterialTheme.colorScheme.outline
 )
 
 @Composable
 internal fun gastroOutlinedTextFieldColors() = OutlinedTextFieldDefaults.colors(
-    focusedBorderColor = CornflowerBlue,
-    unfocusedBorderColor = CornflowerBlue45,
-    cursorColor = CornflowerBlue,
-    focusedLabelColor = CornflowerBlue,
-    unfocusedLabelColor = Calypso75
+    focusedBorderColor = MaterialTheme.colorScheme.primary,
+    unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+    cursorColor = MaterialTheme.colorScheme.primary,
+    focusedLabelColor = MaterialTheme.colorScheme.primary,
+    unfocusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant
 )
 
 @Composable
 internal fun gastroSegmentedButtonColors() = SegmentedButtonDefaults.colors(
-    activeContainerColor = CornflowerBlue,
-    activeContentColor = Color.White,
-    activeBorderColor = CornflowerBlue,
+    activeContainerColor = MaterialTheme.colorScheme.primary,
+    activeContentColor = MaterialTheme.colorScheme.onPrimary,
+    activeBorderColor = MaterialTheme.colorScheme.primary,
     inactiveContainerColor = Color.Transparent,
-    inactiveContentColor = Calypso,
-    inactiveBorderColor = CornflowerBlue45
+    inactiveContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+    inactiveBorderColor = MaterialTheme.colorScheme.outline
 )

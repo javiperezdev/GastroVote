@@ -117,7 +117,7 @@ fun RatingRoute(modifier: Modifier = Modifier) {
             currentBarIndex = (currentBarIndex - 1 + bars.size) % bars.size
         },
         onFavouriteChange = {
-            // Create a new map with the new pair if it doesn't exist
+            // Create a new map with the updated pair, if it doesn't exist it's added
             isBarFavourite = isBarFavourite + (bar.id to !isFavourite)
 
             val toastText = if (!isFavourite) addedFavourite else removedFavourite
