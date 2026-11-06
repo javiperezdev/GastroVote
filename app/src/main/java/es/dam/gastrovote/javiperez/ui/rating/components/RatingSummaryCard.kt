@@ -30,7 +30,9 @@ internal fun RatingSummaryCard(
     vegetarian: Boolean,
     glutenFree: Boolean,
     spicy: Boolean,
-    comment: String
+    comment: String,
+    rating: Int,
+    ratingComment: String = stringResource(R.string.rating_none)
 ) {
     if (finalPrice == -1.0) return
 
@@ -81,6 +83,7 @@ internal fun RatingSummaryCard(
         SummaryLine("${stringResource(R.string.summary_tapa)} $tapa")
         SummaryLine("${stringResource(R.string.summary_price)} $price")
         SummaryLine("${stringResource(R.string.summary_size)} ${size.asString()}")
+        SummaryLine("${stringResource(R.string.summary_rating)} $rating ($ratingComment)")
         SummaryLine("${stringResource(R.string.summary_quality_price)} $qualityPrice/10")
         SummaryLine("${stringResource(R.string.summary_discount)} $discount")
         SummaryLine("${stringResource(R.string.summary_final_price)} $finalPriceText")

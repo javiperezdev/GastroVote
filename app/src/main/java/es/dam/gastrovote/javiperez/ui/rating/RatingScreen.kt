@@ -63,6 +63,7 @@ internal fun RatingScreen(
     onFavouriteChange: () -> Unit,
     isFavourite: Boolean,
     onRatingChange: (Int) -> Unit,
+    ratingComment: String,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -148,7 +149,9 @@ internal fun RatingScreen(
                 vegetarian = vegetarian,
                 glutenFree = glutenFree,
                 spicy = spicy,
-                comment = comment
+                comment = comment,
+                rating = rating,
+                ratingComment = ratingComment
             )
         }
     }

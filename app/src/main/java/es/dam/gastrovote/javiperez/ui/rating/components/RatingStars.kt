@@ -27,7 +27,7 @@ internal fun StarRow(
         horizontalArrangement = Arrangement.spacedBy(2.dp)
     ) {
         for(i in 1..5) {
-            if (i < rating) {
+            if (i <= rating) {
                 filled = true
             }
 

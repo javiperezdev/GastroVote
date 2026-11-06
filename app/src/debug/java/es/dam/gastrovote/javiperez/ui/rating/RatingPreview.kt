@@ -50,7 +50,8 @@ private fun RatingScreenPreview() {
             onPreviousBar = {},
             onFavouriteChange = {},
             isFavourite = false,
-            onRatingChange = {}
+            onRatingChange = {},
+            ratingComment = ""
         )
     }
 }
