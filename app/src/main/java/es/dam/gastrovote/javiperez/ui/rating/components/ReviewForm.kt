@@ -37,7 +37,8 @@ internal fun ReviewForm(
     spicy: Boolean,
     onSpicyChange: (Boolean) -> Unit,
     comment: String,
-    onCommentChange: (String) -> Unit
+    onCommentChange: (String) -> Unit,
+    onRatingChange: (Int) -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         FieldLabel(text = stringResource(R.string.size))
@@ -73,6 +74,7 @@ internal fun ReviewForm(
             StarRow(
                 rating = rating,
                 starSize = 32.sp,
+                onRatingChange = onRatingChange
             )
         }
 

@@ -1,5 +1,6 @@
 package es.dam.gastrovote.javiperez.ui.rating.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -16,6 +17,7 @@ internal fun StarRow(
     rating: Int,
     starSize: TextUnit,
     modifier: Modifier = Modifier,
+    onRatingChange: ((Int) -> Unit)? = null
 ) {
     var filled = false
 
@@ -31,7 +33,12 @@ internal fun StarRow(
 
             Text(
                 text = if (filled) "★" else "☆",
-                modifier = Modifier.padding(horizontal = 3.dp, vertical = 2.dp),
+                modifier = Modifier.padding(horizontal = 3.dp, vertical = 2.dp).then(
+                    if (onRatingChange != null) {
+                        Modifier.clickable(onClick = { onRatingChange(i)} )
+                    }
+                    else Modifier
+                ),
                 fontSize = starSize,
                 color = if (filled) {
                     MaterialTheme.colorScheme.tertiary
@@ -39,7 +46,6 @@ internal fun StarRow(
                     MaterialTheme.colorScheme.outline
                 }
             )
-
             filled = false
         }
     }

@@ -124,6 +124,9 @@ fun RatingRoute(modifier: Modifier = Modifier) {
             showToast(text = toastText, context = context)
         },
         isFavourite = isFavourite,
+        onRatingChange = {
+            newRating -> rating = newRating + 1
+        },
         modifier = modifier
     )
 }

@@ -49,7 +49,8 @@ private fun RatingScreenPreview() {
             onNextBar = {},
             onPreviousBar = {},
             onFavouriteChange = {},
-            isFavourite = false
+            isFavourite = false,
+            onRatingChange = {}
         )
     }
 }

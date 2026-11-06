@@ -62,6 +62,7 @@ internal fun RatingScreen(
     onPreviousBar: () -> Unit,
     onFavouriteChange: () -> Unit,
     isFavourite: Boolean,
+    onRatingChange: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -110,7 +111,8 @@ internal fun RatingScreen(
                 spicy = spicy,
                 onSpicyChange = onSpicyChange,
                 comment = comment,
-                onCommentChange = onCommentChange
+                onCommentChange = onCommentChange,
+                onRatingChange = onRatingChange
             )
 
             LikeSwitchRow(liked = liked, onLikedChange = onLikedChange)
