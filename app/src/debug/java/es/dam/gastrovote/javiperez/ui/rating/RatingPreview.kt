@@ -51,7 +51,8 @@ private fun RatingScreenPreview() {
             onFavouriteChange = {},
             isFavourite = false,
             onRatingChange = {},
-            ratingComment = ""
+            ratingComment = "",
+            reviewedBars = setOf()
         )
     }
 }

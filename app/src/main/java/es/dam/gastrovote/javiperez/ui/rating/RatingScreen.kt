@@ -64,7 +64,8 @@ internal fun RatingScreen(
     isFavourite: Boolean,
     onRatingChange: (Int) -> Unit,
     ratingComment: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    reviewedBars: Set<Int>
 ) {
     Column(
         modifier = modifier
@@ -127,7 +128,7 @@ internal fun RatingScreen(
 
             SectionTitle(text = stringResource(R.string.summary_and_progress))
 
-            RouteProgress(reviewedBars = 0, totalBars = totalBars)
+            RouteProgress(reviewedBars = reviewedBars.size, totalBars = totalBars)
 
             if (finalPrice == -1.0) {
                 Text(

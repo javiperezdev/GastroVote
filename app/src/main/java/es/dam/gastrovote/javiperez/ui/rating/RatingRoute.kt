@@ -43,6 +43,8 @@ fun RatingRoute(modifier: Modifier = Modifier) {
     var spicy by rememberSaveable(bar.id) { mutableStateOf(false) }
     var comment by rememberSaveable(bar.id) { mutableStateOf("") }
 
+    var reviewedBars by remember { mutableStateOf(setOf<Int>())}
+
     val context = LocalContext.current
 
     val studentReminder = stringResource(R.string.student_card_reminder)
@@ -50,7 +52,6 @@ fun RatingRoute(modifier: Modifier = Modifier) {
     val addedFavourite = stringResource(R.string.added_favourite)
     val removedFavourite = stringResource(R.string.removed_favourite)
     val rateTapa = stringResource(R.string.rate_tapa)
-
 
     val isFavourite = isBarFavourite[bar.id] ?: false
 
@@ -103,6 +104,8 @@ fun RatingRoute(modifier: Modifier = Modifier) {
 
                 finalPrice = result
 
+                reviewedBars = reviewedBars + bar.id
+
                 showToast(
                     text = publishReview,
                     context = context
@@ -139,6 +142,7 @@ fun RatingRoute(modifier: Modifier = Modifier) {
             newRating -> rating = newRating
         },
         ratingComment = stringResource(mapRatingToComment(rating)),
+        reviewedBars = reviewedBars,
         modifier = modifier
     )
 }
