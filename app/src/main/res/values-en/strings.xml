@@ -9,6 +9,11 @@
     <string name="did_you_like_it">Did you like it?</string>
     <string name="you_like_it">You liked the tapa!</string>
     <string name="clean">CLEAR</string>
+    <string name="clear_confirm_title">Clear the review?</string>
+    <string name="clear_confirm_message">All entered data will be deleted.</string>
+    <string name="clear_confirm">Clear</string>
+    <string name="form_cleared">Form cleared</string>
+    <string name="cancel">Cancel</string>
     <string name="post_review">Post review</string>
     <string name="student_discount">Student discount (10%)</string>
     <string name="resume">Final prices will appear here</string>

@@ -45,6 +45,8 @@ fun RatingRoute(modifier: Modifier = Modifier) {
 
     var reviewedBars by remember { mutableStateOf(setOf<Int>())}
 
+    var showClearDialog by rememberSaveable { mutableStateOf(false) }
+
     val context = LocalContext.current
 
     val studentReminder = stringResource(R.string.student_card_reminder)
@@ -52,6 +54,7 @@ fun RatingRoute(modifier: Modifier = Modifier) {
     val addedFavourite = stringResource(R.string.added_favourite)
     val removedFavourite = stringResource(R.string.removed_favourite)
     val rateTapa = stringResource(R.string.rate_tapa)
+    val formCleared = stringResource(R.string.form_cleared)
 
     val isFavourite = isBarFavourite[bar.id] ?: false
 
@@ -112,7 +115,10 @@ fun RatingRoute(modifier: Modifier = Modifier) {
                 )
             }
         },
-        onClear = {
+        showClearDialog = showClearDialog,
+        onClearRequest = { showClearDialog = true },
+        onClearConfirm = {
+            showClearDialog = false
             finalPrice = -1.0
             liked = false
             isStudent = false
@@ -123,7 +129,10 @@ fun RatingRoute(modifier: Modifier = Modifier) {
             glutenFree = false
             spicy = false
             comment = ""
+
+            showToast(text = formCleared, context = context)
         },
+        onClearDismiss = { showClearDialog = false },
         onNextBar = {
             currentBarIndex = (currentBarIndex + 1) % bars.size
         },

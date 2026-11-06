@@ -57,7 +57,10 @@ internal fun RatingScreen(
     onLikedChange: (Boolean) -> Unit,
     onStudentChange: (Boolean) -> Unit,
     onPublish: () -> Unit,
-    onClear: () -> Unit,
+    showClearDialog: Boolean,
+    onClearRequest: () -> Unit,
+    onClearConfirm: () -> Unit,
+    onClearDismiss: () -> Unit,
     onNextBar: () -> Unit,
     onPreviousBar: () -> Unit,
     onFavouriteChange: () -> Unit,
@@ -122,7 +125,10 @@ internal fun RatingScreen(
             StudentDiscountRow(isStudent = isStudent, onStudentChange = onStudentChange)
 
             RatingActionButtons(
-                onClear = onClear,
+                showClearDialog = showClearDialog,
+                onClearRequest = onClearRequest,
+                onClearConfirm = onClearConfirm,
+                onClearDismiss = onClearDismiss,
                 onPublish = onPublish
             )
 

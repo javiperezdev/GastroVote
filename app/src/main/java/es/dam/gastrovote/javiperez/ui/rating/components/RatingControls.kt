@@ -3,10 +3,12 @@ package es.dam.gastrovote.javiperez.ui.rating.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -67,7 +69,10 @@ internal fun StudentDiscountRow(
 
 @Composable
 internal fun RatingActionButtons(
-    onClear: () -> Unit,
+    showClearDialog: Boolean,
+    onClearRequest: () -> Unit,
+    onClearConfirm: () -> Unit,
+    onClearDismiss: () -> Unit,
     onPublish: () -> Unit
 ) {
     Row(
@@ -75,7 +80,7 @@ internal fun RatingActionButtons(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         GastroButton(
-            onClick = onClear,
+            onClick = onClearRequest,
             buttonContent = stringResource(R.string.clean),
             color = MaterialTheme.colorScheme.secondary,
             modifier = Modifier.weight(1f)
@@ -86,6 +91,24 @@ internal fun RatingActionButtons(
             buttonContent = stringResource(R.string.post_review),
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.weight(1f)
+        )
+    }
+
+    if (showClearDialog) {
+        AlertDialog(
+            onDismissRequest = onClearDismiss,
+            title = { Text(stringResource(R.string.clear_confirm_title)) },
+            text = { Text(stringResource(R.string.clear_confirm_message)) },
+            confirmButton = {
+                TextButton(onClick = onClearConfirm) {
+                    Text(stringResource(R.string.clear_confirm))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = onClearDismiss) {
+                    Text(stringResource(R.string.cancel))
+                }
+            }
         )
     }
 }
