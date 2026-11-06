@@ -23,7 +23,7 @@
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="student_card_reminder">Recuerda enseñar tu carnet de estudiante</string>
-    <string name="price_calculated">Precio calculado</string>
+    <string name="review_pulbished">¡Reseña publicada!</string>
     <string name="error_bar_and_tapa">Indica el bar y la tapa</string>
     <string name="error_invalid_price">El precio no es valido</string>
     <string name="bar_position">Bar %1$s de %2$s</string>
@@ -61,4 +61,5 @@
     <string name="route_progress">Ruta: %1$s de %2$s bares</string>
     <string name="added_favourite">Añadido a favoritos</string>
     <string name="removed_favourite">Eliminado de favoritos</string>
+    <string name="rate_tapa">Califica la tapa antes de publicar</string>
 </resources>

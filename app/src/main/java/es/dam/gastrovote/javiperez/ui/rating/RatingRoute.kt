@@ -46,9 +46,10 @@ fun RatingRoute(modifier: Modifier = Modifier) {
     val context = LocalContext.current
 
     val studentReminder = stringResource(R.string.student_card_reminder)
-    val priceCalculated = stringResource(R.string.price_calculated)
+    val publishReview = stringResource(R.string.review_pulbished)
     val addedFavourite = stringResource(R.string.added_favourite)
     val removedFavourite = stringResource(R.string.removed_favourite)
+    val rateTapa = stringResource(R.string.rate_tapa)
 
 
     val isFavourite = isBarFavourite[bar.id] ?: false
@@ -86,15 +87,24 @@ fun RatingRoute(modifier: Modifier = Modifier) {
             }
         },
         onPublish = {
-            val result = calculateFinalPrice(
-                originalPrice = originalPrice,
-                isStudent = isStudent,
-                tapaSize = selectedSize
-            )
-            finalPrice = result
-            if (result != -1.0) {
+            if (rating == 0) {
                 showToast(
-                    text = priceCalculated,
+                    text = rateTapa,
+                    context = context
+                )
+            }
+
+            else {
+                val result = calculateFinalPrice(
+                    originalPrice = originalPrice,
+                    isStudent = isStudent,
+                    tapaSize = selectedSize
+                )
+
+                finalPrice = result
+
+                showToast(
+                    text = publishReview,
                     context = context
                 )
             }

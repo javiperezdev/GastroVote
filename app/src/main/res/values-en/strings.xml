@@ -23,10 +23,9 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="student_card_reminder">Remember to show your student card</string>
-    <string name="price_calculated">Price calculated</string>
+    <string name="review_pulbished">Review published!</string>
     <string name="error_bar_and_tapa">Enter the bar and the tapa</string>
     <string name="error_invalid_price">The price is not valid</string>
-
     <string name="bar_position">Bar %1$s of %2$s</string>
     <string name="previous_bar">Previous bar</string>
     <string name="next_bar">Next bar</string>
@@ -62,4 +61,5 @@
     <string name="route_progress">Route: %1$s of %2$s bars</string>
     <string name="added_favourite">Added to favourites</string>
     <string name="removed_favourite">Removed from favourites</string>
+    <string name="rate_tapa">Rate the tapa before publishing</string>
 </resources>
