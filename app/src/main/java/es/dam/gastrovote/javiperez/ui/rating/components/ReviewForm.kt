@@ -23,6 +23,8 @@ import es.dam.gastrovote.javiperez.R
 import es.dam.gastrovote.javiperez.domain.model.TapaSize
 import es.dam.gastrovote.javiperez.ui.asString
 import es.dam.gastrovote.javiperez.ui.components.GastroTagCheckbox
+import es.dam.gastrovote.javiperez.ui.mapRatingToComment
+
 @Composable
 internal fun ReviewForm(
     selectedSize: TapaSize,
@@ -69,12 +71,19 @@ internal fun ReviewForm(
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(32.dp)
         ) {
             StarRow(
                 rating = rating,
                 starSize = 32.sp,
                 onRatingChange = onRatingChange
+            )
+
+            Text(
+                text = stringResource(mapRatingToComment(rating)),
+                modifier = Modifier.fillMaxWidth(),
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.primary
             )
         }
 
