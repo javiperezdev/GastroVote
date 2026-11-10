@@ -24,6 +24,7 @@ import es.dam.gastrovote.javiperez.domain.model.TapaSize
 import es.dam.gastrovote.javiperez.ui.asString
 import es.dam.gastrovote.javiperez.ui.components.GastroTagCheckbox
 import es.dam.gastrovote.javiperez.ui.mapRatingToComment
+import kotlin.math.roundToInt
 
 @Composable
 internal fun ReviewForm(
@@ -95,7 +96,7 @@ internal fun ReviewForm(
             FieldLabel(text = stringResource(R.string.quality_price))
 
             Text(
-                text = "${qualityPrice.toInt()}/10",
+                text = "${qualityPrice.roundToInt()}/10",
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -105,7 +106,7 @@ internal fun ReviewForm(
             value = qualityPrice,
             onValueChange = onQualityPriceChange,
             valueRange = 0f..10f,
-            steps = 10,
+            steps = 9,
             modifier = Modifier.fillMaxWidth(),
             colors = gastroSliderColors()
         )

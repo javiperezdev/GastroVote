@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gastro Vote</string>
+    <string name="app_name">GastroVote</string>
     <string name="app_title">GastroVote</string>
     <string name="app_subtitle">Ruta de la tapa</string>
     <string name="tapa_name">Tapa name</string>

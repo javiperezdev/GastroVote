@@ -63,3 +63,5 @@ To run the project in your local environment, follow these steps:
 | Publish without stars | Clear confirmation | Same bar reviewed twice |
 |---|---|---|
 | ![No stars](docs/tests/caso_sin_estrellas.png) | ![Clear dialog](docs/tests/caso_dialogo_limpiar.png) | ![Double review](docs/tests/caso_doble_resena.png) |
+
+Images and resources were generated with AI.
