@@ -1,4 +1,4 @@
-package es.dam.gastrovote.javiperez.ui.rating.components
+package es.dam.gastrovote.javiperez.ui.review.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image

@@ -1,4 +1,4 @@
-package es.dam.gastrovote.javiperez.ui.rating
+package es.dam.gastrovote.javiperez.ui.review
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
@@ -6,13 +6,13 @@ import es.dam.gastrovote.javiperez.domain.model.Tapa
 import es.dam.gastrovote.javiperez.ui.theme.GastroVoteTheme
 
 @Preview(
-    name = "RatingScreen",
+    name = "ReviewScreen",
     showBackground = true,
     widthDp = 412,
     heightDp = 1800
 )
 @Composable
-private fun RatingScreenPreview() {
+private fun ReviewScreenPreview() {
     val tapa = Tapa(
         id = 1,
         name = "Marinera murciana",
@@ -21,7 +21,7 @@ private fun RatingScreenPreview() {
         rating = 5
     )
     GastroVoteTheme(darkTheme = true) {
-        RatingScreen(
+        ReviewScreen(
             bar = "La Taberna del Puerto",
             tapa = tapa,
             totalBars = 8,

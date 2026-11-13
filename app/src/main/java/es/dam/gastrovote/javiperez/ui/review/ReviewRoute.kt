@@ -1,4 +1,4 @@
-package es.dam.gastrovote.javiperez.ui.rating
+package es.dam.gastrovote.javiperez.ui.review
 
 import android.content.Context
 import android.widget.Toast
@@ -22,7 +22,7 @@ import es.dam.gastrovote.javiperez.ui.mapRatingToComment
 
 
 @Composable
-fun RatingRoute(modifier: Modifier = Modifier) {
+fun ReviewRoute(modifier: Modifier = Modifier) {
     var currentBarIndex by rememberSaveable { mutableIntStateOf(0) }
     val bars = remember { BarRepository().bars }
     val bar = bars[currentBarIndex]
@@ -58,7 +58,7 @@ fun RatingRoute(modifier: Modifier = Modifier) {
 
     val isFavourite = isBarFavourite[bar.id] ?: false
 
-    RatingScreen(
+    ReviewScreen(
         bar = bar.name,
         totalBars = bars.size,
         tapa = tapa,

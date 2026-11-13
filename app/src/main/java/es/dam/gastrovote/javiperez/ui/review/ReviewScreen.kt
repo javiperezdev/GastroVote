@@ -1,4 +1,4 @@
-package es.dam.gastrovote.javiperez.ui.rating
+package es.dam.gastrovote.javiperez.ui.review
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -26,20 +26,20 @@ import androidx.compose.ui.unit.dp
 import es.dam.gastrovote.javiperez.R
 import es.dam.gastrovote.javiperez.domain.model.Tapa
 import es.dam.gastrovote.javiperez.domain.model.TapaSize
-import es.dam.gastrovote.javiperez.ui.rating.components.BarSelector
-import es.dam.gastrovote.javiperez.ui.rating.components.LikeSwitchRow
-import es.dam.gastrovote.javiperez.ui.rating.components.RatingActionButtons
-import es.dam.gastrovote.javiperez.ui.rating.components.RatingHeader
-import es.dam.gastrovote.javiperez.ui.rating.components.RatingSummaryCard
-import es.dam.gastrovote.javiperez.ui.rating.components.ReviewForm
-import es.dam.gastrovote.javiperez.ui.rating.components.RouteProgress
-import es.dam.gastrovote.javiperez.ui.rating.components.SectionTitle
-import es.dam.gastrovote.javiperez.ui.rating.components.StudentDiscountRow
-import es.dam.gastrovote.javiperez.ui.rating.components.TapaInfoCard
+import es.dam.gastrovote.javiperez.ui.review.components.BarSelector
+import es.dam.gastrovote.javiperez.ui.review.components.LikeSwitchRow
+import es.dam.gastrovote.javiperez.ui.review.components.RatingActionButtons
+import es.dam.gastrovote.javiperez.ui.review.components.RatingHeader
+import es.dam.gastrovote.javiperez.ui.review.components.RatingSummaryCard
+import es.dam.gastrovote.javiperez.ui.review.components.ReviewForm
+import es.dam.gastrovote.javiperez.ui.review.components.RouteProgress
+import es.dam.gastrovote.javiperez.ui.review.components.SectionTitle
+import es.dam.gastrovote.javiperez.ui.review.components.StudentDiscountRow
+import es.dam.gastrovote.javiperez.ui.review.components.TapaInfoCard
 import kotlin.math.roundToInt
 
 @Composable
-internal fun RatingScreen(
+internal fun ReviewScreen(
     bar: String,
     tapa: Tapa,
     totalBars: Int,
