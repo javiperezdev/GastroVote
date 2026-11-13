@@ -21,6 +21,7 @@ import es.dam.gastrovote.javiperez.domain.model.TapaSize
 import es.dam.gastrovote.javiperez.ui.mapRatingToComment
 
 
+
 @Composable
 fun ReviewRoute(modifier: Modifier = Modifier) {
     var currentBarIndex by rememberSaveable { mutableIntStateOf(0) }
@@ -151,7 +152,6 @@ fun ReviewRoute(modifier: Modifier = Modifier) {
             newRating -> rating = newRating
         },
         ratingComment = stringResource(mapRatingToComment(rating)),
-        reviewedBars = reviewedBars,
         modifier = modifier
     )
 }

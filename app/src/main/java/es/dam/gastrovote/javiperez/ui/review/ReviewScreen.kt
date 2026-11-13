@@ -32,7 +32,7 @@ import es.dam.gastrovote.javiperez.ui.review.components.RatingActionButtons
 import es.dam.gastrovote.javiperez.ui.review.components.RatingHeader
 import es.dam.gastrovote.javiperez.ui.review.components.RatingSummaryCard
 import es.dam.gastrovote.javiperez.ui.review.components.ReviewForm
-import es.dam.gastrovote.javiperez.ui.review.components.RouteProgress
+import es.dam.gastrovote.javiperez.ui.components.RouteProgress
 import es.dam.gastrovote.javiperez.ui.review.components.SectionTitle
 import es.dam.gastrovote.javiperez.ui.review.components.StudentDiscountRow
 import es.dam.gastrovote.javiperez.ui.review.components.TapaInfoCard
@@ -74,7 +74,6 @@ internal fun ReviewScreen(
     onRatingChange: (Int) -> Unit,
     ratingComment: String,
     modifier: Modifier = Modifier,
-    reviewedBars: Set<Int>
 ) {
     Column(
         modifier = modifier
@@ -147,7 +146,6 @@ internal fun ReviewScreen(
 
             SectionTitle(text = stringResource(R.string.summary_and_progress))
 
-            RouteProgress(reviewedBars = reviewedBars.size, totalBars = totalBars)
 
             if (finalPrice == -1.0) {
                 Text(

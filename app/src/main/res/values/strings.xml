@@ -67,4 +67,7 @@
     <string name="added_favourite">Añadido a favoritos</string>
     <string name="removed_favourite">Eliminado de favoritos</string>
     <string name="rate_tapa">Califica la tapa antes de publicar</string>
+    <string name="home_greeting">¡Hola, %1$s!</string>
+    <string name="home_greeting_anonymous">¡Hola!</string>
+    <string name="see_route">Ver la ruta</string>
 </resources>

@@ -67,4 +67,7 @@
     <string name="added_favourite">Added to favourites</string>
     <string name="removed_favourite">Removed from favourites</string>
     <string name="rate_tapa">Rate the tapa before publishing</string>
+    <string name="home_greeting">Hello, %1$s!</string>
+    <string name="home_greeting_anonymous">Hello!</string>
+    <string name="see_route">See the ruta</string>
 </resources>

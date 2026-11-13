@@ -1,4 +1,4 @@
-package es.dam.gastrovote.javiperez.ui.review.components
+package es.dam.gastrovote.javiperez.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

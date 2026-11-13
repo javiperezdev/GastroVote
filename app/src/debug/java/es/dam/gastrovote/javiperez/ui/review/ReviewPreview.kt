@@ -6,7 +6,6 @@ import es.dam.gastrovote.javiperez.domain.model.Tapa
 import es.dam.gastrovote.javiperez.ui.theme.GastroVoteTheme
 
 @Preview(
-    name = "ReviewScreen",
     showBackground = true,
     widthDp = 412,
     heightDp = 1800
@@ -20,7 +19,7 @@ private fun ReviewScreenPreview() {
         price = 3.50,
         rating = 5
     )
-    GastroVoteTheme(darkTheme = true) {
+    GastroVoteTheme(darkTheme = false) {
         ReviewScreen(
             bar = "La Taberna del Puerto",
             tapa = tapa,
@@ -55,7 +54,6 @@ private fun ReviewScreenPreview() {
             isFavourite = false,
             onRatingChange = {},
             ratingComment = "",
-            reviewedBars = setOf()
         )
     }
 }
