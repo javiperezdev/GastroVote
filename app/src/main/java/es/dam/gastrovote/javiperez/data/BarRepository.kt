@@ -14,7 +14,10 @@ class BarRepository {
                 description = "Rosquilla crujiente con ensaladilla rusa y una anchoa.",
                 price = 3.50,
                 rating = 4
-            )
+            ),
+            phone = "+34 968 21 45 67",
+            address = "Calle Mayor, 12, 30001 Murcia",
+            web = "https://latabernadelpuerto.es"
         ),
         Bar(
             id = 2,
@@ -25,7 +28,10 @@ class BarRepository {
                 description = "Revuelto tradicional de calabacín, cebolla y huevo.",
                 price = 4.00,
                 rating = 4
-            )
+            ),
+            phone = "+34 968 22 18 90",
+            address = "Plaza de las Flores, 5, 30004 Murcia",
+            web = "https://elrinconmurciano.es"
         ),
         Bar(
             id = 3,
@@ -36,7 +42,10 @@ class BarRepository {
                 description = "Croqueta casera de bechamel cremosa con jamón ibérico.",
                 price = 2.80,
                 rating = 5
-            )
+            ),
+            phone = "+34 968 23 56 71",
+            address = "Calle Jara Carrillo, 8, 30001 Murcia",
+            web = "https://casacarmela.es"
         ),
         Bar(
             id = 4,
@@ -47,7 +56,10 @@ class BarRepository {
                 description = "Pan tostado con solomillo, queso de cabra y cebolla caramelizada.",
                 price = 5.50,
                 rating = 4
-            )
+            ),
+            phone = "+34 968 24 09 32",
+            address = "Avenida de la Libertad, 14, 30009 Murcia",
+            web = "https://laesquinadelsabor.es"
         ),
         Bar(
             id = 5,
@@ -58,7 +70,10 @@ class BarRepository {
                 description = "Patatas doradas acompañadas de salsa brava casera y alioli.",
                 price = 3.00,
                 rating = 3
-            )
+            ),
+            phone = "+34 968 25 63 44",
+            address = "Calle Sagasta, 21, 30001 Murcia",
+            web = "https://mesonlosolivos.es"
         ),
         Bar(
             id = 6,
@@ -69,7 +84,10 @@ class BarRepository {
                 description = "Gamba rebozada en una fina capa crujiente.",
                 price = 3.80,
                 rating = 4
-            )
+            ),
+            phone = "+34 968 26 77 15",
+            address = "Plaza San Juan, 3, 30003 Murcia",
+            web = "https://elpatiodelaabuela.es"
         ),
         Bar(
             id = 7,
@@ -80,7 +98,10 @@ class BarRepository {
                 description = "Queso de cabra horneado con miel y nueces.",
                 price = 4.50,
                 rating = 5
-            )
+            ),
+            phone = "+34 968 27 88 26",
+            address = "Calle Victorio, 9, 30003 Murcia",
+            web = "https://bodegalacepa.es"
         ),
         Bar(
             id = 8,
@@ -91,7 +112,10 @@ class BarRepository {
                 description = "Habas secas guisadas al estilo murciano con chorizo y panceta.",
                 price = 4.00,
                 rating = 4
-            )
+            ),
+            phone = "+34 968 28 34 58",
+            address = "Paseo de Garay, 17, 30003 Murcia",
+            web = "https://elfogonmediterraneo.es"
         )
     )
 }
