@@ -19,8 +19,7 @@ class MainActivity : ComponentActivity() {
                 HomeScreen(
                     username = "Javi", // TODO(#31): read from UserPreferences
                     reviewedCount = 0, // TODO(#31): read from UserPreferences
-                    totalBars = totalBars,
-                    onSeeRuta = { /* TODO(#24): open RouteActivity */ }
+                    totalBars = totalBars
                 )
             }
         }

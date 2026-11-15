@@ -17,7 +17,6 @@ internal fun HomeScreenPreview() {
             username = "Lucía",
             reviewedCount = 3,
             totalBars = 8,
-            onSeeRuta = {}
         )
     }
 }
