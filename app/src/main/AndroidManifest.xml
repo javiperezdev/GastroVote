@@ -24,6 +24,10 @@
             android:name=".RutaActivity"
             android:exported="false"
         />
+        <activity
+            android:name=".BarActivity"
+            android:exported="false"
+            />
     </application>
 
 </manifest>
