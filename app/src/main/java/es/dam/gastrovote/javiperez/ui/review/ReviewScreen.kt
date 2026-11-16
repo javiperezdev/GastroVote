@@ -32,10 +32,9 @@ import es.dam.gastrovote.javiperez.ui.review.components.RatingActionButtons
 import es.dam.gastrovote.javiperez.ui.review.components.RatingHeader
 import es.dam.gastrovote.javiperez.ui.review.components.RatingSummaryCard
 import es.dam.gastrovote.javiperez.ui.review.components.ReviewForm
-import es.dam.gastrovote.javiperez.ui.components.RouteProgress
 import es.dam.gastrovote.javiperez.ui.review.components.SectionTitle
 import es.dam.gastrovote.javiperez.ui.review.components.StudentDiscountRow
-import es.dam.gastrovote.javiperez.ui.review.components.TapaInfoCard
+import es.dam.gastrovote.javiperez.ui.review.components.TapaCard
 import kotlin.math.roundToInt
 
 @Composable
@@ -111,7 +110,7 @@ internal fun ReviewScreen(
                 onPreviousBar = onPreviousBar
             )
 
-            TapaInfoCard(tapa = tapa, isFavourite = isFavourite, onFavouriteChange = onFavouriteChange)
+            TapaCard(tapa = tapa, isFavourite = isFavourite, onFavouriteChange = onFavouriteChange)
 
             SectionTitle(text = stringResource(R.string.your_review))
 

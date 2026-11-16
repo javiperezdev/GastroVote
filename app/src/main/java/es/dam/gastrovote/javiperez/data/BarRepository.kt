@@ -116,6 +116,6 @@ class BarRepository {
             phone = "+34 968 28 34 58",
             address = "Paseo de Garay, 17, 30003 Murcia",
             web = "https://elfogonmediterraneo.es"
-        )
+        ),
     )
 }
