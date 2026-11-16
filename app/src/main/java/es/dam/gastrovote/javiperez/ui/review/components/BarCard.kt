@@ -40,7 +40,9 @@ internal fun BarCard(
                     style = MaterialTheme.typography.titleSmall,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                Row() {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
                     if (isFavourite) {
                         Image(
                             painter = painterResource(R.drawable.favourite),
@@ -58,7 +60,7 @@ internal fun BarCard(
                     }
                 }
             }
-                // Check ui and adjust the card, I am working for the #24
+
             Text(
                 text = bar.tapa.name,
                 style = MaterialTheme.typography.bodySmall,

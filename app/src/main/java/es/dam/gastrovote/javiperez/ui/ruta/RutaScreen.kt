@@ -8,18 +8,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import es.dam.gastrovote.javiperez.domain.model.Bar
+import es.dam.gastrovote.javiperez.ui.components.GastroScaffold
 import es.dam.gastrovote.javiperez.ui.review.components.BarCard
 
 @Composable
 internal fun RutaScreen(
-    bars: List<Bar>
+    bars: List<Bar>,
+    modifier: Modifier = Modifier
 ) {
-    LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+    GastroScaffold(
+        modifier = modifier,
+        showBanner = false
     ) {
-        items(bars) { bar ->
-            BarCard(bar, true, true)
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(bars) { bar ->
+                BarCard(bar, true, true)
+            }
         }
     }
 }

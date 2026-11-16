@@ -1,31 +1,14 @@
 package es.dam.gastrovote.javiperez.ui.review
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.only
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import es.dam.gastrovote.javiperez.R
 import es.dam.gastrovote.javiperez.domain.model.Tapa
 import es.dam.gastrovote.javiperez.domain.model.TapaSize
+import es.dam.gastrovote.javiperez.ui.components.GastroScaffold
 import es.dam.gastrovote.javiperez.ui.review.components.BarSelector
 import es.dam.gastrovote.javiperez.ui.review.components.LikeSwitchRow
 import es.dam.gastrovote.javiperez.ui.review.components.RatingActionButtons
@@ -74,102 +57,79 @@ internal fun ReviewScreen(
     ratingComment: String,
     modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .verticalScroll(rememberScrollState())
+    GastroScaffold(
+        modifier = modifier,
+        scrollable = true
     ) {
-        Image(
-            painter = painterResource(R.drawable.gastro_vote_banner),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(max = 240.dp)
+        RatingHeader()
+
+        BarSelector(
+            bar = bar,
+            position = tapa.id,
+            total = totalBars,
+            onNextBar = onNextBar,
+            onPreviousBar = onPreviousBar
         )
 
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .windowInsetsPadding(
-                    WindowInsets.safeDrawing.only(
-                        WindowInsetsSides.Horizontal + WindowInsetsSides.Bottom
-                    )
-                )
-                .padding(horizontal = 24.dp, vertical = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            RatingHeader()
+        TapaCard(tapa = tapa, isFavourite = isFavourite, onFavouriteChange = onFavouriteChange)
 
-            BarSelector(
-                bar = bar,
-                position = tapa.id,
-                total = totalBars,
-                onNextBar = onNextBar,
-                onPreviousBar = onPreviousBar
-            )
+        SectionTitle(text = stringResource(R.string.your_review))
 
-            TapaCard(tapa = tapa, isFavourite = isFavourite, onFavouriteChange = onFavouriteChange)
+        ReviewForm(
+            selectedSize = selectedSize,
+            onSizeChange = onSizeChange,
+            rating = rating,
+            qualityPrice = qualityPrice,
+            onQualityPriceChange = onQualityPriceChange,
+            vegetarian = vegetarian,
+            onVegetarianChange = onVegetarianChange,
+            glutenFree = glutenFree,
+            onGlutenFreeChange = onGlutenFreeChange,
+            spicy = spicy,
+            onSpicyChange = onSpicyChange,
+            comment = comment,
+            onCommentChange = onCommentChange,
+            onRatingChange = onRatingChange
+        )
 
-            SectionTitle(text = stringResource(R.string.your_review))
+        LikeSwitchRow(liked = liked, onLikedChange = onLikedChange)
 
-            ReviewForm(
-                selectedSize = selectedSize,
-                onSizeChange = onSizeChange,
-                rating = rating,
-                qualityPrice = qualityPrice,
-                onQualityPriceChange = onQualityPriceChange,
-                vegetarian = vegetarian,
-                onVegetarianChange = onVegetarianChange,
-                glutenFree = glutenFree,
-                onGlutenFreeChange = onGlutenFreeChange,
-                spicy = spicy,
-                onSpicyChange = onSpicyChange,
-                comment = comment,
-                onCommentChange = onCommentChange,
-                onRatingChange = onRatingChange
-            )
+        StudentDiscountRow(isStudent = isStudent, onStudentChange = onStudentChange)
 
-            LikeSwitchRow(liked = liked, onLikedChange = onLikedChange)
+        RatingActionButtons(
+            showClearDialog = showClearDialog,
+            onClearRequest = onClearRequest,
+            onClearConfirm = onClearConfirm,
+            onClearDismiss = onClearDismiss,
+            onPublish = onPublish
+        )
 
-            StudentDiscountRow(isStudent = isStudent, onStudentChange = onStudentChange)
-
-            RatingActionButtons(
-                showClearDialog = showClearDialog,
-                onClearRequest = onClearRequest,
-                onClearConfirm = onClearConfirm,
-                onClearDismiss = onClearDismiss,
-                onPublish = onPublish
-            )
-
-            SectionTitle(text = stringResource(R.string.summary_and_progress))
+        SectionTitle(text = stringResource(R.string.summary_and_progress))
 
 
-            if (finalPrice == -1.0) {
-                Text(
-                    text = stringResource(R.string.resume),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
-
-            RatingSummaryCard(
-                bar = bar,
-                tapa = tapa.name,
-                originalPrice = originalPrice,
-                liked = liked,
-                finalPrice = finalPrice,
-                isStudent = isStudent,
-                size = selectedSize,
-                qualityPrice = qualityPrice.roundToInt(),
-                vegetarian = vegetarian,
-                glutenFree = glutenFree,
-                spicy = spicy,
-                comment = comment,
-                rating = rating,
-                ratingComment = ratingComment
+        if (finalPrice == -1.0) {
+            Text(
+                text = stringResource(R.string.resume),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.primary
             )
         }
+
+        RatingSummaryCard(
+            bar = bar,
+            tapa = tapa.name,
+            originalPrice = originalPrice,
+            liked = liked,
+            finalPrice = finalPrice,
+            isStudent = isStudent,
+            size = selectedSize,
+            qualityPrice = qualityPrice.roundToInt(),
+            vegetarian = vegetarian,
+            glutenFree = glutenFree,
+            spicy = spicy,
+            comment = comment,
+            rating = rating,
+            ratingComment = ratingComment
+        )
     }
 }
