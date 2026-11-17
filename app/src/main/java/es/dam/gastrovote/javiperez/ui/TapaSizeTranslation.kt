@@ -5,6 +5,8 @@ import androidx.compose.ui.res.stringResource
 import es.dam.gastrovote.javiperez.R
 import es.dam.gastrovote.javiperez.domain.model.TapaSize
 
+// This function would be interesting to made it kotlin only and move it to /model
+
 @Composable
 internal fun TapaSize.asString(): String { // Extension function to convert TapaSize to String
     val resId = when (this) {

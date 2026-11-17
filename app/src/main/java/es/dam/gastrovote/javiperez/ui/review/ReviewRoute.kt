@@ -16,7 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import es.dam.gastrovote.javiperez.R
 import es.dam.gastrovote.javiperez.data.BarRepository
-import es.dam.gastrovote.javiperez.domain.calculate
+import es.dam.gastrovote.javiperez.domain.calculatePrice
 import es.dam.gastrovote.javiperez.domain.model.TapaSize
 import es.dam.gastrovote.javiperez.ui.mapRatingToComment
 
@@ -161,7 +161,7 @@ private fun calculateFinalPrice(
     originalPrice: Double,
     tapaSize: TapaSize,
 ): Double {
-    return calculate(basePrice = originalPrice, isStudent = isStudent, tapaSize = tapaSize)
+    return calculatePrice(basePrice = originalPrice, isStudent = isStudent, tapaSize = tapaSize)
 }
 
 private fun showToast(text: String, context: Context) {

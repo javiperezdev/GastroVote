@@ -29,7 +29,10 @@ internal fun HomeScreen(
 ) {
     val context = LocalContext.current
 
-    GastroScaffold(modifier = modifier) {
+    GastroScaffold(
+        modifier = modifier,
+        scrollable = true
+    ) {
         Text(
             text = if (username.isBlank()) {
                 stringResource(R.string.home_greeting_anonymous)

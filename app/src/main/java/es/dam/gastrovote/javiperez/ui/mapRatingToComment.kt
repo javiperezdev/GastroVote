@@ -2,6 +2,7 @@ package es.dam.gastrovote.javiperez.ui
 
 import es.dam.gastrovote.javiperez.R
 
+// It would be interesting to move it to /model
 
 internal fun mapRatingToComment(rating: Int): Int {
     return when (rating) {
