@@ -15,7 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import es.dam.gastrovote.javiperez.R
+import es.dam.gastrovote.javiperez.ui.components.FieldLabel
 import es.dam.gastrovote.javiperez.ui.components.GastroButton
+import es.dam.gastrovote.javiperez.ui.components.gastroCheckboxColors
+import es.dam.gastrovote.javiperez.ui.components.gastroSwitchColors
 
 @Composable
 internal fun LikeSwitchRow(

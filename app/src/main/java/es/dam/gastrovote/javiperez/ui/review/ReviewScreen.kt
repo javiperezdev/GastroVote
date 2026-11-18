@@ -9,13 +9,11 @@ import es.dam.gastrovote.javiperez.R
 import es.dam.gastrovote.javiperez.domain.model.Tapa
 import es.dam.gastrovote.javiperez.domain.model.TapaSize
 import es.dam.gastrovote.javiperez.ui.components.GastroScaffold
-import es.dam.gastrovote.javiperez.ui.review.components.BarSelector
+import es.dam.gastrovote.javiperez.ui.components.SectionTitle
 import es.dam.gastrovote.javiperez.ui.review.components.LikeSwitchRow
 import es.dam.gastrovote.javiperez.ui.review.components.RatingActionButtons
-import es.dam.gastrovote.javiperez.ui.review.components.RatingHeader
 import es.dam.gastrovote.javiperez.ui.review.components.RatingSummaryCard
 import es.dam.gastrovote.javiperez.ui.review.components.ReviewForm
-import es.dam.gastrovote.javiperez.ui.review.components.SectionTitle
 import es.dam.gastrovote.javiperez.ui.review.components.StudentDiscountRow
 import es.dam.gastrovote.javiperez.ui.review.components.TapaCard
 import kotlin.math.roundToInt
@@ -24,7 +22,6 @@ import kotlin.math.roundToInt
 internal fun ReviewScreen(
     bar: String,
     tapa: Tapa,
-    totalBars: Int,
     originalPrice: Double,
     liked: Boolean,
     isStudent: Boolean,
@@ -49,8 +46,6 @@ internal fun ReviewScreen(
     onClearRequest: () -> Unit,
     onClearConfirm: () -> Unit,
     onClearDismiss: () -> Unit,
-    onNextBar: () -> Unit,
-    onPreviousBar: () -> Unit,
     onFavouriteChange: () -> Unit,
     isFavourite: Boolean,
     onRatingChange: (Int) -> Unit,
@@ -61,15 +56,6 @@ internal fun ReviewScreen(
         modifier = modifier,
         scrollable = true
     ) {
-        RatingHeader()
-
-        BarSelector(
-            bar = bar,
-            position = tapa.id,
-            total = totalBars,
-            onNextBar = onNextBar,
-            onPreviousBar = onPreviousBar
-        )
 
         TapaCard(tapa = tapa, isFavourite = isFavourite, onFavouriteChange = onFavouriteChange)
 

@@ -16,6 +16,7 @@ import es.dam.gastrovote.javiperez.R
 import es.dam.gastrovote.javiperez.domain.getMultiplier
 import es.dam.gastrovote.javiperez.domain.model.TapaSize
 import es.dam.gastrovote.javiperez.ui.asString
+import es.dam.gastrovote.javiperez.ui.components.SummaryLine
 
 @Composable
 internal fun RatingSummaryCard(
@@ -87,7 +88,7 @@ internal fun RatingSummaryCard(
             "${stringResource(R.string.summary_rating)} " +
                 stringResource(R.string.rating_with_comment, rating, ratingComment)
         )
-        SummaryLine("${stringResource(R.string.summary_quality_price)} $qualityPrice/10")
+        SummaryLine("${stringResource(R.string.summary_quality_price)} ${stringResource(R.string.quality_price_value, qualityPrice)}")
         SummaryLine("${stringResource(R.string.summary_discount)} $discount")
         SummaryLine("${stringResource(R.string.summary_final_price)} $finalPriceText")
         SummaryLine("${stringResource(R.string.summary_liked)} $like")

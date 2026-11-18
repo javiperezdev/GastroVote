@@ -22,7 +22,12 @@ import androidx.compose.ui.unit.sp
 import es.dam.gastrovote.javiperez.R
 import es.dam.gastrovote.javiperez.domain.model.TapaSize
 import es.dam.gastrovote.javiperez.ui.asString
+import es.dam.gastrovote.javiperez.ui.components.FieldLabel
 import es.dam.gastrovote.javiperez.ui.components.GastroTagCheckbox
+import es.dam.gastrovote.javiperez.ui.components.SectionTitle
+import es.dam.gastrovote.javiperez.ui.components.gastroOutlinedTextFieldColors
+import es.dam.gastrovote.javiperez.ui.components.gastroSegmentedButtonColors
+import es.dam.gastrovote.javiperez.ui.components.gastroSliderColors
 import es.dam.gastrovote.javiperez.ui.mapRatingToComment
 import kotlin.math.roundToInt
 
@@ -80,12 +85,7 @@ internal fun ReviewForm(
                 onRatingChange = onRatingChange
             )
 
-            Text(
-                text = stringResource(mapRatingToComment(rating)),
-                modifier = Modifier.fillMaxWidth(),
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.primary
-            )
+            SectionTitle(text = stringResource(mapRatingToComment(rating)))
         }
 
         Row(
@@ -95,11 +95,7 @@ internal fun ReviewForm(
         ) {
             FieldLabel(text = stringResource(R.string.quality_price))
 
-            Text(
-                text = stringResource(R.string.quality_price_value, qualityPrice.roundToInt()),
-                style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+            FieldLabel(text = stringResource(R.string.quality_price_value, qualityPrice.roundToInt()))
         }
 
         Slider(

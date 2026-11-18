@@ -23,7 +23,6 @@ private fun ReviewScreenPreview() {
         ReviewScreen(
             bar = "La Taberna del Puerto",
             tapa = tapa,
-            totalBars = 8,
             originalPrice = 3.50,
             liked = false,
             isStudent = false,
@@ -48,8 +47,6 @@ private fun ReviewScreenPreview() {
             onClearRequest = {},
             onClearConfirm = {},
             onClearDismiss = {},
-            onNextBar = {},
-            onPreviousBar = {},
             onFavouriteChange = {},
             isFavourite = false,
             onRatingChange = {},

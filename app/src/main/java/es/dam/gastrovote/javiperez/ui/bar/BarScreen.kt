@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -25,9 +24,9 @@ import es.dam.gastrovote.javiperez.domain.calculatePrice
 import es.dam.gastrovote.javiperez.ui.asString
 import es.dam.gastrovote.javiperez.ui.components.GastroButton
 import es.dam.gastrovote.javiperez.ui.components.GastroScaffold
+import es.dam.gastrovote.javiperez.ui.components.SectionTitle
+import es.dam.gastrovote.javiperez.ui.components.SummaryLine
 import es.dam.gastrovote.javiperez.ui.mapRatingToComment
-import es.dam.gastrovote.javiperez.ui.review.components.SectionTitle
-import es.dam.gastrovote.javiperez.ui.review.components.SummaryLine
 import es.dam.gastrovote.javiperez.ui.review.components.TapaCard
 
 @Composable
@@ -55,7 +54,7 @@ internal fun BarScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
-            Text(text="${bar.address} - ${bar.phone}", style = MaterialTheme.typography.bodySmall)
+            SummaryLine("${bar.address} - ${bar.phone}")
 
             Column() {
                 Row(

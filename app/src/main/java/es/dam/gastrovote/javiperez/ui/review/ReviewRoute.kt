@@ -61,7 +61,6 @@ fun ReviewRoute(modifier: Modifier = Modifier) {
 
     ReviewScreen(
         bar = bar.name,
-        totalBars = bars.size,
         tapa = tapa,
         originalPrice = originalPrice,
         liked = liked,
@@ -134,12 +133,6 @@ fun ReviewRoute(modifier: Modifier = Modifier) {
             showToast(text = formCleared, context = context)
         },
         onClearDismiss = { showClearDialog = false },
-        onNextBar = {
-            currentBarIndex = (currentBarIndex + 1) % bars.size
-        },
-        onPreviousBar = {
-            currentBarIndex = (currentBarIndex - 1 + bars.size) % bars.size
-        },
         onFavouriteChange = {
             // Create a new map with the updated pair, if it doesn't exist it's added
             isBarFavourite = isBarFavourite + (bar.id to !isFavourite)

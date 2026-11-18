@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,14 +20,12 @@ internal fun RouteProgress(
     totalBars: Int
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-        Text(
+        FieldLabel(
             text = stringResource(
                 R.string.route_progress,
                 reviewedBars.toString(),
                 totalBars.toString()
-            ),
-            style = MaterialTheme.typography.labelMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         )
 
         LinearProgressIndicator(

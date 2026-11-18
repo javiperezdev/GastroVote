@@ -23,6 +23,7 @@ import es.dam.gastrovote.javiperez.BarActivity
 import es.dam.gastrovote.javiperez.R
 import es.dam.gastrovote.javiperez.domain.model.Bar
 import es.dam.gastrovote.javiperez.ui.components.GastroCard
+import es.dam.gastrovote.javiperez.ui.components.SummaryLine
 import kotlin.jvm.java
 
 @Composable
@@ -75,11 +76,7 @@ internal fun BarCard(
                 }
             }
 
-            Text(
-                text = bar.tapa.name,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+            SummaryLine(bar.tapa.name)
         }
     }
 }
