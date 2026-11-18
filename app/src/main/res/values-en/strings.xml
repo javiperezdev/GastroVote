@@ -70,4 +70,15 @@
     <string name="home_greeting">Hello, %1$s!</string>
     <string name="home_greeting_anonymous">Hello!</string>
     <string name="see_route">See the ruta</string>
+    <string name="wifi_connected">* Connected to wifi</string>
+    <string name="bar_call">CALL</string>
+    <string name="bar_web">WEB</string>
+    <string name="bar_location">LOCATION</string>
+    <string name="bar_share">SHARE</string>
+    <string name="share_tapa">I am trying the tapa %1$s at %2$s with GastroVote</string>
+    <string name="write_review">WRITE A REVIEW</string>
+    <string name="price_breakdown">%1$s x %2$s = %3$s</string>
+    <string name="rating_with_comment">%1$d (%2$s)</string>
+    <string name="quality_price_value">%1$d/10</string>
+    <string name="comment_length">%1$d/200</string>
 </resources>

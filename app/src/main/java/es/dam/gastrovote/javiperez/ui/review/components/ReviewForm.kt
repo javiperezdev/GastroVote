@@ -96,7 +96,7 @@ internal fun ReviewForm(
             FieldLabel(text = stringResource(R.string.quality_price))
 
             Text(
-                text = "${qualityPrice.roundToInt()}/10",
+                text = stringResource(R.string.quality_price_value, qualityPrice.roundToInt()),
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -145,7 +145,7 @@ internal fun ReviewForm(
             placeholder = { Text(text = stringResource(R.string.comment_hint)) },
             supportingText = {
                 Text(
-                    text = "${comment.length}/200"
+                    text = stringResource(R.string.comment_length, comment.length)
                 )
             },
             minLines = 3,

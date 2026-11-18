@@ -75,7 +75,7 @@ internal fun TapaCard(tapa: Tapa, isFavourite: Boolean, onFavouriteChange: () ->
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 Text(
-                    text = "$tapaPrice €",
+                    text = stringResource(R.string.price_format, tapaPrice),
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary

@@ -56,7 +56,7 @@ internal fun HomeScreen(
         ) {
             Text(
                 modifier = Modifier.padding(8.dp),
-                text = "* Connected to wifi",
+                text = stringResource(R.string.wifi_connected),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSecondaryContainer
             )
