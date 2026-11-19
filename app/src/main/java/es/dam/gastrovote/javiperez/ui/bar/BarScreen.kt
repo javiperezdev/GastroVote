@@ -16,6 +16,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableDoubleStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -45,6 +47,7 @@ internal fun BarScreen(
 ) {
     GastroScaffold(
         modifier = modifier,
+        scrollable = true,
         showBanner = false
     ) {
         val bar = BarRepository().bars[barId]
@@ -52,8 +55,8 @@ internal fun BarScreen(
         val context = LocalContext.current
         val shareTapa = stringResource(R.string.share_tapa, bar.tapa.name, bar.name)
         var tapaSize by rememberSaveable(bar.id) { mutableStateOf<TapaSize?>(null) }
-        var tapaRating by rememberSaveable(bar.id) { mutableStateOf(-1) }
-        var finalPrice by rememberSaveable(bar.id) { mutableStateOf(-1.0) }
+        var tapaRating by rememberSaveable(bar.id) { mutableIntStateOf(-1) }
+        var finalPrice by rememberSaveable(bar.id) { mutableDoubleStateOf(-1.0) }
 
         val launcher = rememberLauncherForActivityResult(
             ActivityResultContracts.StartActivityForResult()

@@ -4,14 +4,17 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -47,9 +50,14 @@ fun ReviewRoute(
     var spicy by rememberSaveable(bar.id) { mutableStateOf(false) }
     var comment by rememberSaveable(bar.id) { mutableStateOf("") }
 
-    var reviewedBars by remember { mutableStateOf(setOf<Int>())}
-
     var showClearDialog by rememberSaveable { mutableStateOf(false) }
+    var showDiscardDialog by rememberSaveable { mutableStateOf(false) }
+
+    val hasUnsavedData = rating != 0 || comment.isNotBlank() || liked || isStudent ||
+        qualityPrice != 5f || selectedSize != TapaSize.TAPA ||
+        vegetarian || glutenFree || spicy
+
+    BackHandler(enabled = hasUnsavedData) { showDiscardDialog = true }
 
     val context = LocalContext.current
 
@@ -117,12 +125,12 @@ fun ReviewRoute(
                     resultIntent
                 )
 
-                reviewedBars = reviewedBars + bar.id
-
                 showToast(
                     text = publishReview,
                     context = context
                 )
+
+                activity?.finish()
             }
         },
         showClearDialog = showClearDialog,
@@ -149,6 +157,27 @@ fun ReviewRoute(
         ratingComment = stringResource(mapRatingToComment(rating)),
         modifier = modifier
     )
+
+    if (showDiscardDialog) {
+        AlertDialog(
+            onDismissRequest = { showDiscardDialog = false },
+            title = { Text(stringResource(R.string.discard_confirm_title)) },
+            text = { Text(stringResource(R.string.discard_confirm_message)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    showDiscardDialog = false
+                    activity?.finish()
+                }) {
+                    Text(stringResource(R.string.discard_confirm))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDiscardDialog = false }) {
+                    Text(stringResource(R.string.cancel))
+                }
+            }
+        )
+    }
 }
 
 private fun calculateFinalPrice(

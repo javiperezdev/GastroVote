@@ -13,6 +13,9 @@
     <string name="clear_confirm_message">Se borrarán todos los datos introducidos.</string>
     <string name="clear_confirm">Limpiar</string>
     <string name="form_cleared">Formulario limpio</string>
+    <string name="discard_confirm_title">¿Descartar la reseña?</string>
+    <string name="discard_confirm_message">Se perderán los datos introducidos.</string>
+    <string name="discard_confirm">Descartar</string>
     <string name="cancel">Cancelar</string>
     <string name="post_review">Publicar reseña</string>
     <string name="student_discount">Descuento estudiante (10%)</string>
