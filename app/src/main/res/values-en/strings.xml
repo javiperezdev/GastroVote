@@ -45,7 +45,7 @@
     <string name="rating">Rating</string>
     <string name="rating_none">Not rated</string>
     <string name="rating_poor">Could be better</string>
-    <string name="rating_ok">Correct</string>
+    <string name="rating_ok">Right</string>
     <string name="rating_good">Very good!</string>
     <string name="rating_excellent">Outstanding!</string>
     <string name="quality_price">Value for money</string>

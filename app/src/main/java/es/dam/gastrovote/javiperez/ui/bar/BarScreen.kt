@@ -1,7 +1,10 @@
 package es.dam.gastrovote.javiperez.ui.bar
 
+import android.app.Activity
 import android.content.Intent
 import android.content.Intent.ACTION_SEND
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,15 +15,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.content.IntentCompat
 import androidx.core.net.toUri
 import es.dam.gastrovote.javiperez.R
+import es.dam.gastrovote.javiperez.ReviewActivity
 import es.dam.gastrovote.javiperez.data.BarRepository
-import es.dam.gastrovote.javiperez.domain.calculatePrice
+import es.dam.gastrovote.javiperez.domain.model.TapaSize
 import es.dam.gastrovote.javiperez.ui.asString
 import es.dam.gastrovote.javiperez.ui.components.GastroButton
 import es.dam.gastrovote.javiperez.ui.components.GastroScaffold
@@ -42,6 +51,22 @@ internal fun BarScreen(
         val locale = LocalConfiguration.current.locales[0] // Get the first country selected in the device
         val context = LocalContext.current
         val shareTapa = stringResource(R.string.share_tapa, bar.tapa.name, bar.name)
+        var tapaSize by rememberSaveable(bar.id) { mutableStateOf<TapaSize?>(null) }
+        var tapaRating by rememberSaveable(bar.id) { mutableStateOf(-1) }
+        var finalPrice by rememberSaveable(bar.id) { mutableStateOf(-1.0) }
+
+        val launcher = rememberLauncherForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+
+            if (result.resultCode == Activity.RESULT_OK) {
+                tapaRating = result.data?.getIntExtra("tapaRating", -1) ?: -1
+                tapaSize = result.data?.let {
+                    IntentCompat.getSerializableExtra(it, "tapaSize", TapaSize::class.java)
+                }
+                finalPrice = result.data?.getDoubleExtra("finalPrice", -1.0) ?: -1.0
+            }
+        }
 
         TapaCard(
             tapa = bar.tapa,
@@ -56,7 +81,7 @@ internal fun BarScreen(
 
             SummaryLine("${bar.address} - ${bar.phone}")
 
-            Column() {
+            Column {
                 Row(
                     modifier = modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -116,44 +141,47 @@ internal fun BarScreen(
 
             SectionTitle(text = stringResource(R.string.your_review))
 
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(
-                        color = MaterialTheme.colorScheme.surfaceVariant,
-                        shape = RoundedCornerShape(12.dp)
+            if (tapaRating != -1 && tapaSize != null && finalPrice != -1.0) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(
+                            color = MaterialTheme.colorScheme.surfaceVariant,
+                            shape = RoundedCornerShape(12.dp)
+                        )
+                        .padding(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    // !! is used when we now the values aren't null (this case is a good example)
+                    SummaryLine("${stringResource(R.string.size)}: ${tapaSize!!.asString()}")
+                    SummaryLine(
+                        "${stringResource(R.string.rating)}: " +
+                                stringResource(
+                                    R.string.rating_with_comment,
+                                    tapaRating,
+                                    stringResource(mapRatingToComment(tapaRating))
+                                )
                     )
-                    .padding(12.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                SummaryLine("${stringResource(R.string.size)} ${bar.tapa.size.asString()}")
-                SummaryLine(
-                    "${stringResource(R.string.rating)} " +
-                        stringResource(
-                            R.string.rating_with_comment,
-                            bar.tapa.rating,
-                            stringResource(mapRatingToComment(bar.tapa.rating))
-                        )
-                )
-                // isStudent currently mocked to false
-                SummaryLine(
-                    "${stringResource(R.string.summary_final_price)} ${
-                        stringResource(
-                            R.string.price_format,
-                            "%.2f".format(
-                                locale,
-                                calculatePrice(bar.tapa.price, false, tapaSize = bar.tapa.size)
+                    SummaryLine(
+                        "${stringResource(R.string.summary_final_price)} ${
+                            stringResource(
+                                R.string.price_format,
+                                "%.2f".format(locale, finalPrice)
                             )
-                        )
-                    }"
-                )
+                        }"
+                    )
+                }
             }
 
             GastroButton(
                 modifier = Modifier.fillMaxWidth(),
                 buttonContent = stringResource(R.string.write_review),
                 color = MaterialTheme.colorScheme.secondary,
-                onClick = {}
+                onClick = {
+                    val intent = Intent(context, ReviewActivity::class.java)
+                    intent.putExtra("BAR_ID", barId)
+                    launcher.launch(intent)
+                }
             )
         }
     }

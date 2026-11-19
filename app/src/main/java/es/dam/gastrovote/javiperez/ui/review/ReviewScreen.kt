@@ -1,21 +1,15 @@
 package es.dam.gastrovote.javiperez.ui.review
 
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import es.dam.gastrovote.javiperez.R
 import es.dam.gastrovote.javiperez.domain.model.Tapa
 import es.dam.gastrovote.javiperez.domain.model.TapaSize
 import es.dam.gastrovote.javiperez.ui.components.GastroScaffold
-import es.dam.gastrovote.javiperez.ui.components.SectionTitle
 import es.dam.gastrovote.javiperez.ui.review.components.LikeSwitchRow
 import es.dam.gastrovote.javiperez.ui.review.components.RatingActionButtons
 import es.dam.gastrovote.javiperez.ui.review.components.RatingSummaryCard
 import es.dam.gastrovote.javiperez.ui.review.components.ReviewForm
 import es.dam.gastrovote.javiperez.ui.review.components.StudentDiscountRow
-import es.dam.gastrovote.javiperez.ui.review.components.TapaCard
 import kotlin.math.roundToInt
 
 @Composable
@@ -46,20 +40,15 @@ internal fun ReviewScreen(
     onClearRequest: () -> Unit,
     onClearConfirm: () -> Unit,
     onClearDismiss: () -> Unit,
-    onFavouriteChange: () -> Unit,
-    isFavourite: Boolean,
     onRatingChange: (Int) -> Unit,
     ratingComment: String,
     modifier: Modifier = Modifier,
 ) {
     GastroScaffold(
         modifier = modifier,
-        scrollable = true
+        scrollable = true,
+        showBanner = false
     ) {
-
-        TapaCard(tapa = tapa, isFavourite = isFavourite, onFavouriteChange = onFavouriteChange)
-
-        SectionTitle(text = stringResource(R.string.your_review))
 
         ReviewForm(
             selectedSize = selectedSize,
@@ -89,17 +78,6 @@ internal fun ReviewScreen(
             onClearDismiss = onClearDismiss,
             onPublish = onPublish
         )
-
-        SectionTitle(text = stringResource(R.string.summary_and_progress))
-
-
-        if (finalPrice == -1.0) {
-            Text(
-                text = stringResource(R.string.resume),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.primary
-            )
-        }
 
         RatingSummaryCard(
             bar = bar,

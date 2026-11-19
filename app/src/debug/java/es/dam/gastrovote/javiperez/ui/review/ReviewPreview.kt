@@ -47,8 +47,6 @@ private fun ReviewScreenPreview() {
             onClearRequest = {},
             onClearConfirm = {},
             onClearDismiss = {},
-            onFavouriteChange = {},
-            isFavourite = false,
             onRatingChange = {},
             ratingComment = "",
         )

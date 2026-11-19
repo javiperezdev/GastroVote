@@ -1,7 +1,10 @@
 package es.dam.gastrovote.javiperez.ui.review
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.widget.Toast
+import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableDoubleStateOf
@@ -15,18 +18,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import es.dam.gastrovote.javiperez.R
-import es.dam.gastrovote.javiperez.data.BarRepository
 import es.dam.gastrovote.javiperez.domain.calculatePrice
+import es.dam.gastrovote.javiperez.domain.model.Bar
 import es.dam.gastrovote.javiperez.domain.model.TapaSize
 import es.dam.gastrovote.javiperez.ui.mapRatingToComment
 
 
-
 @Composable
-fun ReviewRoute(modifier: Modifier = Modifier) {
-    var currentBarIndex by rememberSaveable { mutableIntStateOf(0) }
-    val bars = remember { BarRepository().bars }
-    val bar = bars[currentBarIndex]
+fun ReviewRoute(
+    bar: Bar,
+    modifier: Modifier = Modifier
+) {
+
+    val activity = LocalActivity.current
     val tapa = bar.tapa
     val originalPrice = tapa.price
 
@@ -37,7 +41,6 @@ fun ReviewRoute(modifier: Modifier = Modifier) {
     var selectedSize by rememberSaveable(bar.id) { mutableStateOf(TapaSize.TAPA) }
     var rating by rememberSaveable(bar.id) { mutableIntStateOf(0) }
     var qualityPrice by rememberSaveable(bar.id) {mutableFloatStateOf(5f) }
-    var isBarFavourite by rememberSaveable { mutableStateOf(mapOf<Int, Boolean>()) }
 
     var vegetarian by rememberSaveable(bar.id) { mutableStateOf(false) }
     var glutenFree by rememberSaveable(bar.id) { mutableStateOf(false) }
@@ -52,12 +55,9 @@ fun ReviewRoute(modifier: Modifier = Modifier) {
 
     val studentReminder = stringResource(R.string.student_card_reminder)
     val publishReview = stringResource(R.string.review_pulbished)
-    val addedFavourite = stringResource(R.string.added_favourite)
-    val removedFavourite = stringResource(R.string.removed_favourite)
     val rateTapa = stringResource(R.string.rate_tapa)
     val formCleared = stringResource(R.string.form_cleared)
 
-    val isFavourite = isBarFavourite[bar.id] ?: false
 
     ReviewScreen(
         bar = bar.name,
@@ -107,6 +107,16 @@ fun ReviewRoute(modifier: Modifier = Modifier) {
 
                 finalPrice = result
 
+                val resultIntent = Intent()
+                resultIntent.putExtra("tapaRating", rating)
+                resultIntent.putExtra("tapaSize", selectedSize)
+                resultIntent.putExtra("finalPrice", result)
+
+                activity?.setResult(
+                    Activity.RESULT_OK,
+                    resultIntent
+                )
+
                 reviewedBars = reviewedBars + bar.id
 
                 showToast(
@@ -133,14 +143,6 @@ fun ReviewRoute(modifier: Modifier = Modifier) {
             showToast(text = formCleared, context = context)
         },
         onClearDismiss = { showClearDialog = false },
-        onFavouriteChange = {
-            // Create a new map with the updated pair, if it doesn't exist it's added
-            isBarFavourite = isBarFavourite + (bar.id to !isFavourite)
-
-            val toastText = if (!isFavourite) addedFavourite else removedFavourite
-            showToast(text = toastText, context = context)
-        },
-        isFavourite = isFavourite,
         onRatingChange = {
             newRating -> rating = newRating
         },
