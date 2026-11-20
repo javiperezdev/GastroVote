@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -17,8 +16,8 @@ import androidx.compose.ui.unit.dp
 import es.dam.gastrovote.javiperez.R
 import es.dam.gastrovote.javiperez.ui.components.FieldLabel
 import es.dam.gastrovote.javiperez.ui.components.GastroButton
+import es.dam.gastrovote.javiperez.ui.components.GastroSwitch
 import es.dam.gastrovote.javiperez.ui.components.gastroCheckboxColors
-import es.dam.gastrovote.javiperez.ui.components.gastroSwitchColors
 
 @Composable
 internal fun LikeSwitchRow(
@@ -32,10 +31,9 @@ internal fun LikeSwitchRow(
     ) {
         FieldLabel(text = stringResource(R.string.i_like_it))
 
-        Switch(
+        GastroSwitch(
             checked = liked,
-            onCheckedChange = onLikedChange,
-            colors = gastroSwitchColors()
+            onCheckedChange = onLikedChange
         )
 
         Text(

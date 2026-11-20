@@ -84,4 +84,7 @@
     <string name="rating_with_comment">%1$d (%2$s)</string>
     <string name="quality_price_value">%1$d/10</string>
     <string name="comment_length">%1$d/200</string>
+    <string name="username">Username</string>
+    <string name="turn_off_notifications">Turn off notifications</string>
+    <string name="turn_on_notifications">Turn on notifications</string>
 </resources>

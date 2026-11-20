@@ -45,6 +45,13 @@ internal fun GastroScaffold(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
+                // The banner draws edge-to-edge behind the status bar, so its screen skips the top inset.
+                .then(
+                    if (showBanner) Modifier
+                    else Modifier.windowInsetsPadding(
+                        WindowInsets.safeDrawing.only(WindowInsetsSides.Top)
+                    )
+                )
                 .then(if (scrollable) Modifier.verticalScroll(scrollState) else Modifier)
         ) {
             if (showBanner) {
