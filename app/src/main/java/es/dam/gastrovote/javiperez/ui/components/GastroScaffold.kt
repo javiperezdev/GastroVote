@@ -27,7 +27,6 @@ import es.dam.gastrovote.javiperez.R
 @Composable
 internal fun GastroScaffold(
     modifier: Modifier = Modifier,
-    topBar: @Composable () -> Unit = {}, //topBar is not implemented yet
     showBanner: Boolean = true,
     scrollable: Boolean = false,
     content: @Composable ColumnScope.() -> Unit
@@ -38,20 +37,22 @@ internal fun GastroScaffold(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
+            // The scaffold owns the top inset: topBar, banner and content always start below the status bar.
+            .windowInsetsPadding(
+                WindowInsets.safeDrawing.only(WindowInsetsSides.Top)
+            )
     ) {
-        topBar()
+        TopBar(
+            sectionTitle = "Test", // Mocked for the moment for testing purposes
+            hasBackArrow = true,
+            hasOptions = true
+        )
+
 
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-                // The banner draws edge-to-edge behind the status bar, so its screen skips the top inset.
-                .then(
-                    if (showBanner) Modifier
-                    else Modifier.windowInsetsPadding(
-                        WindowInsets.safeDrawing.only(WindowInsetsSides.Top)
-                    )
-                )
                 .then(if (scrollable) Modifier.verticalScroll(scrollState) else Modifier)
         ) {
             if (showBanner) {

@@ -87,4 +87,6 @@
     <string name="username">Usuario</string>
     <string name="turn_off_notifications">Desactivar notificaciones</string>
     <string name="turn_on_notifications">Activar notificaciones</string>
+    <string name="back">Atrás</string>
+    <string name="more_options">Más opciones</string>
 </resources>

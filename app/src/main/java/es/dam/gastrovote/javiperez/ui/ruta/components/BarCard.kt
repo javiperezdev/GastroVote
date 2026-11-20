@@ -1,4 +1,4 @@
-package es.dam.gastrovote.javiperez.ui.review.components
+package es.dam.gastrovote.javiperez.ui.ruta.components
 
 import android.content.Intent
 import androidx.compose.foundation.Image

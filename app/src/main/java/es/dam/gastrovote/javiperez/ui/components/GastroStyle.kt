@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 @Composable
-internal fun SectionTitle(text: String) {
+internal fun SectionTitle(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         style = MaterialTheme.typography.titleSmall,
         color = MaterialTheme.colorScheme.primary
     )

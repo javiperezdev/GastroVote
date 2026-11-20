@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import es.dam.gastrovote.javiperez.domain.model.Bar
 import es.dam.gastrovote.javiperez.ui.components.GastroScaffold
-import es.dam.gastrovote.javiperez.ui.review.components.BarCard
+import es.dam.gastrovote.javiperez.ui.ruta.components.BarCard
 
 @Composable
 internal fun RutaScreen(
